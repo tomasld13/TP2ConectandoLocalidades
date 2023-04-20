@@ -1,11 +1,10 @@
-package src.bfs;
+package bfs;
 
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import src.grafos.Grafo;
+import grafos.Grafo;
 
 public class BFS 
 {

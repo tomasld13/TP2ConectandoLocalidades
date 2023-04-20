@@ -1,4 +1,4 @@
-package src.Mapa;
+package Mapa;
 
 import java.awt.EventQueue;
 
