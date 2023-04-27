@@ -11,7 +11,7 @@ public class GrafoListaVecinos {
 	public GrafoListaVecinos(int n)
 	{
 		vecinos = new ArrayList<HashSet<Integer>>();
-		for(int i=0; i<n; ++i)
+		for(int i=1; i<=n; ++i)
 			vecinos.add(new HashSet<Integer>());
 	}
 	
@@ -80,6 +80,43 @@ public class GrafoListaVecinos {
 	{
 		if( i == j )
 			throw new IllegalArgumentException("No se permiten loops: (" + i + ", " + j + ")");
+	}
+
+	public int darPeso(int a, int b) {
+		//Ejemplos de pesos para imitar el que se mostro en el pdf de clase. Falta implementar los pesos por distancia en km.
+		String tot;
+		if(a < b) tot = a + "" + b;
+		else tot = b + "" + a;
+		switch(tot) {
+			case "12":
+				return 4;
+			case "23":
+				return 8;
+			case "34":
+				return 6;
+			case "45":
+				return 9;
+			case "56":
+				return 10;
+			case "67":
+				return 3;
+			case "78":
+				return 1;
+			case "89":
+				return 6;
+			case "28":
+				return 12;
+			case "39":
+				return 3;
+			case "36":
+				return 4;
+			case "46":
+				return 13;
+			case "79":
+				return 5;
+			default:
+				return 8;
+		}
 	}
 	
 }

@@ -5,12 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ListModel;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -18,11 +20,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.LinkedList;
+
+import javax.swing.JList;
+import javax.swing.JLabel;
+import javax.swing.border.EtchedBorder;
 
 public class MainForm 
 {
 
-	private JFrame frame;
+	private JFrame frmConectandoLocalidades;
 	private JPanel panelMapa;
 	private JPanel panelControles;
 	private JMapViewer _mapa;
@@ -30,6 +37,8 @@ public class MainForm
 	private JButton btnEliminar;
 	private MapPolygonImpl _poligono;
 	private JButton btnDibujarPolgono ;
+	private JList listaLocalidades;
+	private LinkedList <String> localidades;
 
 	/**
 	 * Launch the application.
@@ -41,7 +50,7 @@ public class MainForm
 			public void run() {
 				try {
 					MainForm window = new MainForm();
-					window.frame.setVisible(true);
+					window.frmConectandoLocalidades.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -62,18 +71,19 @@ public class MainForm
 	 */
 	private void initialize() 
 	{
-		frame = new JFrame();
-		frame.setBounds(100, 100, 725, 506);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmConectandoLocalidades = new JFrame();
+		frmConectandoLocalidades.setTitle("Conectando Localidades");
+		frmConectandoLocalidades.setBounds(100, 100, 725, 506);
+		frmConectandoLocalidades.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmConectandoLocalidades.getContentPane().setLayout(null);
 		
 		panelMapa = new JPanel();
 		panelMapa.setBounds(10, 11, 437, 446);
-		frame.getContentPane().add(panelMapa);
+		frmConectandoLocalidades.getContentPane().add(panelMapa);
 		
 		panelControles = new JPanel();
 		panelControles.setBounds(457, 11, 242, 446);
-		frame.getContentPane().add(panelControles);		
+		frmConectandoLocalidades.getContentPane().add(panelControles);		
 		panelControles.setLayout(null);
 		
 		_mapa = new JMapViewer();
@@ -102,6 +112,8 @@ public class MainForm
 				_lasCoordenadas.add(markeradd);
 				String nombre = JOptionPane.showInputDialog("Nombre: ");
 				_mapa.addMapMarker(new MapMarkerDot(nombre, markeradd));
+				localidades.add(nombre);
+				
 			}}
 		});
 	}
@@ -116,6 +128,7 @@ public class MainForm
 			{
 				_poligono = new MapPolygonImpl(_lasCoordenadas);
 				_mapa.addMapPolygon(_poligono);
+				
 			}
 		});
 	}
@@ -133,5 +146,36 @@ public class MainForm
 		btnEliminar.setBounds(10, 64, 195, 23);
 		panelControles.add(btnEliminar);
 		panelControles.add(btnDibujarPolgono);
-	}	
-}
+		
+		listaLocalidades = new JList();
+		agregarLocalidades(localidades, listaLocalidades);
+		listaLocalidades.setValueIsAdjusting(true);
+		listaLocalidades.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		listaLocalidades.setBounds(10, 400, 195, -229);
+		panelControles.add(listaLocalidades);
+		
+		JLabel lblLocalidades = new JLabel("Localidades");
+		lblLocalidades.setBounds(10, 138, 89, 14);
+		panelControles.add(lblLocalidades);
+	}
+
+	private ListModel agregarLocalidades(LinkedList<String> localidades2, JList listaLocalidades2) {
+		DefaultListModel lm = new DefaultListModel();
+
+		String[] testList = new String[localidades2.size()]; 
+		
+		for(int i=0; i < testList.length; i++) {
+		      testList[i] = localidades2.get(i);
+		    }
+		  
+	
+		for(int i=0; i < testList.length; i++) {
+		      lm.add(i, testList[i]);
+		    }
+		return lm;
+		  }
+				
+}	
+
+
+
