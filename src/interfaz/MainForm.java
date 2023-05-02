@@ -28,17 +28,17 @@ import java.awt.Button;
 
 public class MainForm extends JFrame {
 
-
+	private static final long serialVersionUID = 1L;
 	private JPanel panelMapa;
 	private JPanel panelControles;
 	private JMapViewer _mapa;
-	public  ArrayList<Coordinate> _lasCoordenadas;
 	private JButton btnEliminarLocalidad;
-	private MapPolygonImpl _poligono;
 	private JButton btnBuscarArbolMinimo ;
 	private ArrayList<String> localidades;
 	private DefaultListModel<String> modelo;
-	private JButton btnNewButton;
+	
+	private JButton btnConectarLocalidades;
+	private JButton btnLocalidad;
 
 
 	/**
@@ -56,6 +56,48 @@ public class MainForm extends JFrame {
 	private void initialize() 
 	{
 		
+		dibujarVentana();
+		nuevaLocalidad();
+		generarArbolMinimo();
+		eliminarArbolMinimo();		
+		agregarLocalidad(localidades, modelo);
+		conectarLocalidades();
+
+	}
+	
+
+
+	private void conectarLocalidades() {
+		
+		btnConectarLocalidades = new JButton("Conectar Localidades");
+		btnConectarLocalidades.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("///// Conectar Localidades /////");
+			}
+		});
+		btnConectarLocalidades.setBounds(27, 88, 195, 48);
+		panelControles.add(btnConectarLocalidades);
+
+		
+	}
+
+	private void nuevaLocalidad() {
+		
+		btnLocalidad = new JButton("Nueva Localidad");
+		btnLocalidad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GestionLocalidades ventanaLocalidad = new GestionLocalidades();
+				ventanaLocalidad.setVisible(true);
+				System.out.println("///// Agregando Nueva Localidad/////");
+				
+			}
+		});
+		btnLocalidad.setBounds(27, 23, 195, 54);
+		panelControles.add(btnLocalidad);
+		
+	}
+
+	private void dibujarVentana() {
 		setTitle("Conectando Localidades");
 		setBounds(100, 100, 725, 506);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,86 +121,34 @@ public class MainForm extends JFrame {
 		localidades = new ArrayList<String>();
 		modelo = new DefaultListModel<String>();
 		
-		detectarCoordenadas();
-		generarArbolMinimo();
-		eliminarArbolMinimo();		
-		agregarLocalidad(localidades, modelo);
-
-	}
-	
-	private void detectarCoordenadas() 
-	{
-		_lasCoordenadas = new ArrayList<Coordinate>();
-				
-		_mapa.addMouseListener(new MouseAdapter() 
-		{
-			@Override
-			public void mouseClicked(MouseEvent e) 
-			{
-			if (e.getButton() == MouseEvent.BUTTON1)
-			{
-				Coordinate markeradd = (Coordinate)
-				_mapa.getPosition(e.getPoint());
-				_lasCoordenadas.add(markeradd);
-				String nombre = JOptionPane.showInputDialog("Nombre: ");
-				_mapa.addMapMarker(new MapMarkerDot(nombre, markeradd));
-				System.out.println(nombre);	
-				localidades.add(nombre);
-				System.out.println(_lasCoordenadas);
-			}
-			
-			}
-
-			
-		});
 	}
 
-	private void generarArbolMinimo() 
-	{
+	private void generarArbolMinimo(){
+		
 		btnBuscarArbolMinimo = new JButton("Buscar Arbol Minimo");
-		btnBuscarArbolMinimo.setBounds(10, 150, 195, 54);
-		btnBuscarArbolMinimo.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				_poligono = new MapPolygonImpl(_lasCoordenadas);
-				_mapa.addMapPolygon(_poligono);
+		btnBuscarArbolMinimo.setBounds(27, 147, 195, 54);
+		btnBuscarArbolMinimo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){
+				System.out.println("///// Generar Arbol Minimo /////");
 			}
 		});
 	}
 
-	private void eliminarArbolMinimo() 
-	{
+	private void eliminarArbolMinimo(){
+		
 		btnEliminarLocalidad = new JButton("Eliminar Arbol Minimo");
 		btnEliminarLocalidad.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				 _mapa.removeMapPolygon(_poligono);
+				System.out.println("///// Borrar Arbol Minimo / /////");
 			}
 		});
-		btnEliminarLocalidad.setBounds(10, 215, 195, 54);
+		btnEliminarLocalidad.setBounds(27, 212, 195, 54);
 		panelControles.add(btnEliminarLocalidad);
 		panelControles.add(btnBuscarArbolMinimo);
 		
-		JButton btnLocalidad = new JButton("Nueva Localidad");
-		btnLocalidad.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				GestionLocalidades ventanaLocalidad = new GestionLocalidades();
-				ventanaLocalidad.setVisible(true);
-				ventanaLocalidad.setAlwaysOnTop(true);
-				
-			}
-		});
-		btnLocalidad.setBounds(10, 26, 195, 54);
-		panelControles.add(btnLocalidad);
 		
-		btnNewButton = new JButton("Conectar Localidades");
-		btnNewButton.setBounds(10, 91, 195, 48);
-		panelControles.add(btnNewButton);
-
-		
-
 	}
 	private void agregarLocalidad(ArrayList<String> localidades, DefaultListModel<String> modelo) {
 		// TODO Auto-generated method stub
@@ -168,13 +158,7 @@ public class MainForm extends JFrame {
 		}
 	}
 	
-	public ArrayList<Coordinate> get_lasCoordenadas() {
-		return _lasCoordenadas;
-	}
-
-	public void set_lasCoordenadas(ArrayList<Coordinate> _lasCoordenadas) {
-		this._lasCoordenadas = _lasCoordenadas;
-	}
+	
 }	
 
 
