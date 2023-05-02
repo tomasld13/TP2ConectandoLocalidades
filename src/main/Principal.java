@@ -1,5 +1,5 @@
 package main;
-import Mapa.MainForm;
+import interfaz.MainForm;
 
 public class Principal {
 	public static void main(String[] args) {

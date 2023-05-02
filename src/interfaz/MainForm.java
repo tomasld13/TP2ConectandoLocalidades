@@ -1,7 +1,7 @@
-package Mapa;
+package interfaz;
 
 import java.awt.EventQueue;
-import Mapa.GestionLocalidades;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -10,6 +10,8 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
+
+import interfaz.GestionLocalidades;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -26,11 +28,11 @@ import java.awt.Button;
 
 public class MainForm extends JFrame {
 
-	private JFrame frmConectandoLocalidades;
+
 	private JPanel panelMapa;
 	private JPanel panelControles;
 	private JMapViewer _mapa;
-	private ArrayList<Coordinate> _lasCoordenadas;
+	public  ArrayList<Coordinate> _lasCoordenadas;
 	private JButton btnEliminarLocalidad;
 	private MapPolygonImpl _poligono;
 	private JButton btnBuscarArbolMinimo ;
@@ -164,7 +166,15 @@ public class MainForm extends JFrame {
 		for (int i = 0; i<localidades.size(); i++) {
 			modelo.addElement(localidades.get(i));
 		}
-	}	
+	}
+	
+	public ArrayList<Coordinate> get_lasCoordenadas() {
+		return _lasCoordenadas;
+	}
+
+	public void set_lasCoordenadas(ArrayList<Coordinate> _lasCoordenadas) {
+		this._lasCoordenadas = _lasCoordenadas;
+	}
 }	
 
 
