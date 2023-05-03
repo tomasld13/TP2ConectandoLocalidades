@@ -1,5 +1,5 @@
 package main;
-import interfaz.MainForm;
+import interfaces.MainForm;
 
 public class Principal {
 	public static void main(String[] args) {

@@ -1,30 +1,16 @@
-package interfaz;
-
-import java.awt.EventQueue;
+package interfaces;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
-
-import interfaz.GestionLocalidades;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
-import javax.swing.JList;
-import javax.swing.JLabel;
-import java.awt.Button;
 
 public class MainForm extends JFrame {
 

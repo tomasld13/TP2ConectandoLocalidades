@@ -1,4 +1,4 @@
-package interfaz;
+package interfaces;
 
 
 
@@ -22,13 +22,16 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import java.awt.List;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
+import javax.swing.JList;
 
 public class GestionLocalidades extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3521851389367389426L;
 	private JPanel panelMapa;
 	private JPanel panelInformacion;
 	private JPanel panelBotones;
@@ -38,15 +41,16 @@ public class GestionLocalidades extends JFrame {
 	private JTextField textProvincia;
 	private JTextField textLatitud;
 	private JTextField textLongitud;
-	private JTextPane textPaneLocalidades;
 	
 	private JButton btnGuardar;
 	private JButton cancelar;
-	private JButton btnGuardarYAgregar;
+	private JButton btnGuardarYCrear;
 	
-    private LinkedList<Localidad> localidades;
 	private Coordinate markeradd;
-
+	private JList listaLocalidades;
+	
+	private ArrayList <Localidad>   listarLocalidades;
+	Localidad localidad = new Localidad();
 
 
 	/**
@@ -65,9 +69,9 @@ public class GestionLocalidades extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		localidades = new LinkedList<Localidad>();
+		listarLocalidades = new ArrayList<>();
 		dibujarVentana();
-		agregarLocalidad();
+		crearLocalidad();
 		cancelar();
 		guardarYagregar();
 		detectarCoordenadas();
@@ -163,17 +167,17 @@ public class GestionLocalidades extends JFrame {
 		lblLocalidades.setBounds(10, 11, 217, 26);
 		panelLocalidades.add(lblLocalidades);
 		
-		textPaneLocalidades = new JTextPane();
-		textPaneLocalidades.setBounds(20, 48, 217, 201);
-		panelLocalidades.add(textPaneLocalidades);
+		listaLocalidades = new JList<String>();
+		listaLocalidades.setBounds(10, 60, 245, 189);
+		panelLocalidades.add(listaLocalidades);
 		
 		
 	}
-	private void agregarLocalidad() {
+	private void crearLocalidad() {
 		
-		Localidad localidad = new Localidad();
+		//Localidad localidad = new Localidad();
 
-		btnGuardar = new JButton("Guardar");
+		btnGuardar = new JButton("Crear");
 		btnGuardar.addActionListener(new ActionListener() {
 			
 			@Override
@@ -184,11 +188,11 @@ public class GestionLocalidades extends JFrame {
 				localidad.setProvincia(textProvincia.getText());
 				localidad.setLatitud(Double.parseDouble(textLongitud.getText()));				
 				localidad.setLongitud(Double.parseDouble(textLatitud.getText()));
-				localidades.add(localidad);
+				listarLocalidades.add(localidad);
 				
 				
 				setVisible(false);
-					
+				System.out.println(listarLocalidades);
 				} catch (Exception NumberFormatException ) {
 					
 					JOptionPane.showMessageDialog(null, "Completar todos los datos",
@@ -217,19 +221,50 @@ public class GestionLocalidades extends JFrame {
 	}
 	
 	private void guardarYagregar() {
-		btnGuardarYAgregar = new JButton("Guardar y Agregar");
-		btnGuardarYAgregar.addActionListener(new ActionListener() {
+		btnGuardarYCrear = new JButton("Guardar  y Crear");
+		btnGuardarYCrear.addActionListener(new ActionListener() {
+			@SuppressWarnings({ "unchecked", "rawtypes" })
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-				Localidad localidad = new Localidad();
-				localidad.setNombre(textNombre.getText());
-				localidad.setProvincia(textProvincia.getText());
-				localidad.setLatitud(Double.parseDouble(textLongitud.getText()));				
-				localidad.setLongitud(Double.parseDouble(textLatitud.getText()));
-				localidades.add(localidad);
-				textPaneLocalidades.setText(localidades.getLast().getNombre() + " " + localidades.getLast().getProvincia()  
-						+ " " + localidades.getLast().getLatitud()  + " " + localidades.getLast().getLongitud());
+					
+					  Localidad localidad = new Localidad();
+					  localidad.setNombre(textNombre.getText());
+					  localidad.setProvincia(textProvincia.getText());
+					  localidad.setLatitud(Double.parseDouble(textLongitud.getText()));
+					  localidad.setLongitud(Double.parseDouble(textLatitud.getText()));
+					  listarLocalidades.add(localidad);
+					 
+				
+				/////ACA////
+				int tamano = listarLocalidades.size();
+				final String [] vector = new String [tamano];
+				for (int conta=0;conta<tamano;conta++) {
+					vector[conta] = listarLocalidades.get(conta).getNombre() + " - " + listarLocalidades.get(conta).getProvincia() + " - " + 
+									listarLocalidades.get(conta).getLatitud() + " - " + listarLocalidades.get(conta).getLongitud();
+				}
+				listaLocalidades.setModel(new javax.swing.AbstractListModel() {
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+					String [] vect = vector;
+					@Override
+					public int getSize() {
+						
+						return vect.length;
+					}
+
+					@Override
+					public Object getElementAt(int index) {
+						// TODO Auto-generated method stub
+						return vect[index];
+					}
+					
+				});
+
+				System.out.println(listarLocalidades.toString());
 				
 				}catch (Exception NumberFormatException) {
 					JOptionPane.showMessageDialog(null, "Completar todos los datos",
@@ -239,8 +274,8 @@ public class GestionLocalidades extends JFrame {
 				
 			}
 		});
-		btnGuardarYAgregar.setBounds(109, 11, 144, 23);
-		panelBotones.add(btnGuardarYAgregar);
+		btnGuardarYCrear.setBounds(109, 11, 144, 23);
+		panelBotones.add(btnGuardarYCrear);
 	}
 
 	private void detectarCoordenadas() {
