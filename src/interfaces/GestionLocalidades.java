@@ -55,7 +55,7 @@ public class GestionLocalidades extends JFrame {
 
 	/**
 	 * Create the application.
-	 * @param _mapa 
+	 * 
 	 */
 	public GestionLocalidades() {
 		getContentPane().setBackground(Color.WHITE);
@@ -93,7 +93,7 @@ public class GestionLocalidades extends JFrame {
 		_mapa.setZoom(4);
 		_mapa.setBounds(10, 46, 410, 328);
 		_mapa.setDisplayPosition(new Coordinate(-34.521, -58.7008), 15);
-		panelMapa.setLayout(null);
+		
 		panelMapa.add(_mapa);
 		
 		JLabel lblMapa = new JLabel("Mapa");
@@ -300,4 +300,5 @@ public class GestionLocalidades extends JFrame {
 
 		});
 	}
+
 }
