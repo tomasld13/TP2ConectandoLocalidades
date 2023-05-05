@@ -80,6 +80,7 @@ public class MainForm extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				GestionLocalidades ventanaLocalidad = new GestionLocalidades();
 				ventanaLocalidad.setVisible(true);
+				setVisible(false);
 				System.out.println("///// Agregando Nueva Localidad/////");
 				
 			}

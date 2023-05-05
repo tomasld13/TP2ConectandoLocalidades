@@ -27,6 +27,8 @@ import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.JList;
+import javax.swing.border.LineBorder;
+import javax.swing.border.EtchedBorder;
 
 public class GestionLocalidades extends JFrame {
 
@@ -91,21 +93,23 @@ public class GestionLocalidades extends JFrame {
 		getContentPane().add(panelMapa);
 		
 		_mapa = new JMapViewer();
+		_mapa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		_mapa.setToolTipText("Selecciona un punto para conseguir la Latitud y Longitud");
 		_mapa.setZoom(4);
-		_mapa.setBounds(10, 46, 410, 328);
+		_mapa.setBounds(0, 0, 430, 385);
 		_mapa.setDisplayPosition(new Coordinate(-34.521, -58.7008), 15);
+		panelMapa.setLayout(null);
 		
 		panelMapa.add(_mapa);
 		
 		JLabel lblMapa = new JLabel("Mapa");
 		lblMapa.setFont(new Font("Tahoma", Font.ITALIC, 24));
-		lblMapa.setBounds(10, 11, 102, 24);
+		lblMapa.setBounds(186, 410, 58, 29);
 		panelMapa.add(lblMapa);
 		
 		panelInformacion = new JPanel();
 		panelInformacion.setBackground(Color.WHITE);
-		panelInformacion.setBorder(null);
+		panelInformacion.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panelInformacion.setBounds(10, 11, 265, 189);
 		getContentPane().add(panelInformacion);
 		panelInformacion.setLayout(null);
@@ -159,6 +163,7 @@ public class GestionLocalidades extends JFrame {
 		
 		
 		JPanel panelLocalidades = new JPanel();
+		panelLocalidades.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panelLocalidades.setBackground(Color.WHITE);
 		panelLocalidades.setBounds(10, 211, 265, 260);
 		getContentPane().add(panelLocalidades);
@@ -170,7 +175,8 @@ public class GestionLocalidades extends JFrame {
 		panelLocalidades.add(lblLocalidades);
 		
 		listaLocalidades = new JList<String>();
-		listaLocalidades.setBounds(10, 60, 245, 189);
+		listaLocalidades.setBorder(new LineBorder(new Color(0, 0, 0)));
+		listaLocalidades.setBounds(10, 48, 245, 201);
 		panelLocalidades.add(listaLocalidades);
 		
 		
@@ -216,6 +222,8 @@ public class GestionLocalidades extends JFrame {
 		cancelar = new JButton("Cancelar");
 		cancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MainForm ventana = new MainForm();
+				ventana.setVisible(true);
 				setVisible(false);
 			}
 		});
@@ -237,6 +245,7 @@ public class GestionLocalidades extends JFrame {
 					  localidad.setLatitud(Double.parseDouble(textLongitud.getText()));
 					  localidad.setLongitud(Double.parseDouble(textLatitud.getText()));
 					  listarLocalidades.add(localidad);
+					  ConectarLocalidades.listarLocalidades.add(localidad);
 					 
 				
 				/////ACA////
