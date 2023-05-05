@@ -3,6 +3,8 @@ package interfaces;
 
 
 import javax.swing.JFrame;
+
+import localidades.ConectarLocalidades;
 import localidades.Localidad;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
@@ -189,6 +191,7 @@ public class GestionLocalidades extends JFrame {
 				localidad.setLatitud(Double.parseDouble(textLongitud.getText()));				
 				localidad.setLongitud(Double.parseDouble(textLatitud.getText()));
 				listarLocalidades.add(localidad);
+				ConectarLocalidades.listarLocalidades.add(localidad);
 				
 				
 				setVisible(false);

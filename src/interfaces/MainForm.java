@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+import localidades.*;
+
 public class MainForm extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -59,7 +61,11 @@ public class MainForm extends JFrame {
 		btnConectarLocalidades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("///// Conectar Localidades /////");
-			}
+				ConectarLocalidades ventana = new ConectarLocalidades();
+				setVisible(false);
+				ventana.setVisible(true);
+				
+				}
 		});
 		btnConectarLocalidades.setBounds(27, 88, 195, 48);
 		panelControles.add(btnConectarLocalidades);
