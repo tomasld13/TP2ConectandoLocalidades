@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import localidades.*;
+import grafos.*;
 
 public class MainForm extends JFrame {
 
@@ -64,6 +65,7 @@ public class MainForm extends JFrame {
 				ConectarLocalidades ventana = new ConectarLocalidades();
 				setVisible(false);
 				ventana.setVisible(true);
+				//Grafo A = new Grafo(localidades.size());
 				
 				}
 		});

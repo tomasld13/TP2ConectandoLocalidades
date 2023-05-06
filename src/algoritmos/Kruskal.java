@@ -20,13 +20,13 @@ public class Kruskal {
         for (int i = 0; i < grafo.tamano(); i++) {
             for (int vecino : grafo.vecinos(i)) {
                 if (i < vecino) {  // Solo agregamos la arista una vez
-                    aristas.add(new Arista(i, vecino, grafo.darPeso(i, vecino)));
+                    aristas.add(new Arista(i, grafo.darNombreArista(i), vecino, grafo.darNombreArista(vecino), grafo.darPeso(i, vecino)));
                 }
             }
         }
 
         // Ordenar las aristas por peso de menor a mayor
-        Collections.sort(aristas, Comparator.comparingInt(Arista::getPeso));
+        Collections.sort(aristas, Comparator.comparingDouble(Arista::getPeso));
 
         // Aplicar el algoritmo de Kruskal
         ArrayList<Arista> arbolRecubridor = new ArrayList<>();
@@ -56,23 +56,36 @@ public class Kruskal {
     public class Arista {
         final int origen;
         final int destino;
-        final int peso;
+        final double peso;
+        final String nombreOrigen;
+        final String nombreDestino;
 
-        public Arista(int origen, int destino, int peso) {
+        public Arista(int origen, String nombreOrigen, int destino, String nombreDestino, double peso) {
             this.origen = origen;
+            this.nombreOrigen = nombreOrigen;
             this.destino = destino;
+            this.nombreDestino = nombreDestino;
             this.peso = peso;//grafo.getPeso(origen, destino);  // Obtener el peso del grafo
         }
 
         public int getOrigen() {
             return origen;
         }
-
+        
+        public String getNombreOrigen() {
+            return nombreOrigen;
+        }
+        
         public int getDestino() {
             return destino;
         }
+        
+        public String getNombreDestino() {
+            return nombreDestino;
+        }
 
-        public int getPeso() {
+        
+        public double getPeso() {
             return peso;
         }
     }

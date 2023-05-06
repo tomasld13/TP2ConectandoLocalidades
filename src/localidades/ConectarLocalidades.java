@@ -1,7 +1,5 @@
 package localidades;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,10 +14,6 @@ import javax.swing.JList;
 import javax.swing.JLabel;
 import javax.swing.DefaultListModel;
 import java.awt.Font;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.UIManager;
 import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
@@ -33,15 +27,9 @@ public class ConectarLocalidades extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JMapViewer _mapa;
-	DefaultListModel DLM = new DefaultListModel();
+	DefaultListModel<String> DLM = new DefaultListModel<String>();
 
 	
-	
-	
-	
-	
-
-
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +40,7 @@ public class ConectarLocalidades extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	
 	public ConectarLocalidades() {
 		
 		setTitle("Conectar Localidades");
@@ -91,7 +79,7 @@ public class ConectarLocalidades extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelLocalidades.add(lblNewLabel);
 		
-		JList listaLocalidades = new JList();
+		JList<String> listaLocalidades = new JList<String>();
 		listaLocalidades.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		listaLocalidades.setBounds(10, 44, 337, 430);
 		panelLocalidades.add(listaLocalidades);
@@ -116,12 +104,13 @@ public class ConectarLocalidades extends JFrame {
 		btnCancelar.setBounds(108, 11, 89, 23);
 		panel.add(btnCancelar);
 		
-			int tamano = listarLocalidades.size();
+		int tamano = listarLocalidades.size();
 		final String [] vector = new String [tamano];
 		for (int conta=0;conta<tamano;conta++) {
 			vector[conta] = listarLocalidades.get(conta).getNombre() + " - " + listarLocalidades.get(conta).getProvincia() + " - " + 
 							listarLocalidades.get(conta).getLatitud() + " - " + listarLocalidades.get(conta).getLongitud();
 			DLM.addElement(vector[conta]);
+			listaLocalidades.setModel(DLM);
 		}
 
 		
