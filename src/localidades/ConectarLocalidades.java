@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
+import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 import interfaces.MainForm;
 
@@ -28,6 +29,8 @@ public class ConectarLocalidades extends JFrame {
 	private JPanel contentPane;
 	private JMapViewer _mapa;
 	DefaultListModel<String> DLM = new DefaultListModel<String>();
+	public ArrayList<Coordinate> _lasCoordenadas;
+	private Coordinate markeradd;
 
 	
 	/**
@@ -75,7 +78,7 @@ public class ConectarLocalidades extends JFrame {
 		panelLocalidades.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Localidades creadas");
-		lblNewLabel.setBounds(10, 11, 155, 22);
+		lblNewLabel.setBounds(10, 11, 211, 22);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelLocalidades.add(lblNewLabel);
 		
@@ -111,6 +114,11 @@ public class ConectarLocalidades extends JFrame {
 							listarLocalidades.get(conta).getLatitud() + " - " + listarLocalidades.get(conta).getLongitud();
 			DLM.addElement(vector[conta]);
 			listaLocalidades.setModel(DLM);
+			
+			System.out.println(listarLocalidades.get(listaLocalidades.getSelectedIndex()));
+		//	markeradd = new  Coordinate(listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLatitud(),listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLongitud());
+		//	_lasCoordenadas.add(markeradd);
+		//_mapa.addMapMarker(new MapMarkerDot(markeradd));
 		}
 
 		
