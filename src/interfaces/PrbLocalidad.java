@@ -24,7 +24,7 @@ public class PrbLocalidad extends JFrame{
 	private JFrame frame;
 	private JPanel panelMapa;
 	private JPanel panelControles;
-	private JMapViewer _mapa;
+	private static JMapViewer _mapa;
 	private ArrayList<Coordinate> _lasCoordenadas;
 	private JButton btnEliminar;
 	private MapPolygonImpl _poligono;
@@ -39,7 +39,7 @@ public class PrbLocalidad extends JFrame{
 		{
 			public void run() {
 				try {
-					MainForm window = new MainForm();
+					MainForm window = new MainForm(_mapa);
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

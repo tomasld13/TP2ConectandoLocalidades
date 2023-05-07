@@ -31,7 +31,7 @@ public class ConectarLocalidades extends JFrame {
 	 * 
 	 */
 	private JPanel contentPane;
-	private JMapViewer mapa;
+	private JMapViewer mapa = new JMapViewer ();
 	private DefaultListModel<String> DLM = new DefaultListModel<String>();	
 	private Coordinate markeradd;
 
@@ -49,7 +49,7 @@ public class ConectarLocalidades extends JFrame {
 	 * Create the frame.
 	 */
 	
-	public ConectarLocalidades() {
+	public ConectarLocalidades(JMapViewer mapa2) {
 		setTitle("Conectar Localidades");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 799, 610);
@@ -64,7 +64,7 @@ public class ConectarLocalidades extends JFrame {
 		panelMapa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panelMapa.setBounds(377, 11, 396, 368);
 		contentPane.add(panelMapa);
-		mapa = new JMapViewer();
+		mapa = mapa2;
 		mapa.setZoomButtonStyle(ZOOM_BUTTON_STYLE.VERTICAL);
 		mapa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		mapa.setToolTipText("Selecciona un punto para conseguir la Latitud y Longitud");
@@ -117,18 +117,13 @@ public class ConectarLocalidades extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnConectar = new JButton("Conectar");
-		btnConectar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				}
-		});
+
 		btnConectar.setBounds(10, 11, 89, 23);
 		panel.add(btnConectar);
 		
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainForm ventana = new MainForm();
-				ventana.setVisible(true);
 				setVisible(false);
 			}
 		});

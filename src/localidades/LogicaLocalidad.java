@@ -11,19 +11,8 @@ import interfaces.GestionLocalidades;
 
 public class LogicaLocalidad {
 
-	public static void agregarNueva(Localidad localidad, String nombre, String provincia, double latitud,
-			double longitud) {
-		localidad.setNombre(nombre);
-		localidad.setProvincia(provincia);
-		localidad.setLatitud(latitud);
-		localidad.setLongitud(longitud);
-		GestionLocalidades.listarLocalidades.add(localidad);
-		ConectarLocalidades.listarLocalidades.add(localidad);
-		
 
-	}
-
-	public static void AgregarVarias(Localidad localidad, String nombre, String provincia, double latitud,
+	public static void crearLocalidad(Localidad localidad, String nombre, String provincia, double latitud,
 			double longitud, ArrayList<Localidad> listarLocalidades, JList<String> listaLocalidades) {
 
 		localidad = new Localidad();
