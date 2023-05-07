@@ -14,7 +14,7 @@ public class Prb {
 		//Prueba del Algoritmo Kruskal
 		
 		// Creamos el grafo
-		GrafoListaVecinos grafo = new GrafoListaVecinos(8);
+		GrafoListaVecinos grafo = new GrafoListaVecinos();
 		grafo.agregarVertice(0, new Localidad("San Miguel", "Buenos Aires", -34.54335, -58.71229));
 		grafo.agregarVertice(1, new Localidad("José C. Paz", "Buenos Aires", -34.51541, -58.76813));
 		grafo.agregarVertice(2, new Localidad("La Plata", "Buenos Aires", -34.92145, -57.95453));

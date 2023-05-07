@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import localidades.Localidad;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 
@@ -15,16 +16,15 @@ public class GrafoListaVecinos {
 	private ArrayList<HashSet<Integer>> vecinos;
 	private Map<Integer, Localidad> localidades;
 	// Constructor
-	public GrafoListaVecinos(int n)
+	public GrafoListaVecinos()
 	{
 		vecinos = new ArrayList<HashSet<Integer>>();
-		for(int i=1; i<=n; ++i)
-			vecinos.add(new HashSet<Integer>());
+		//for(int i=1; i<=n; ++i)
 		localidades = new HashMap<Integer, Localidad>();
 	}
 	
 	public void agregarVertice(int vertice, Localidad localidad) {
-		System.out.println(localidad.getNombre());
+		vecinos.add(new HashSet<Integer>());
         localidades.put(vertice, localidad);
     }
 	
@@ -47,7 +47,9 @@ public class GrafoListaVecinos {
 		verificarVertice(i);
 		verificarVertice(j);
 		verificarDistintos(i, j);
-	
+		if(existeArista(i, j)) 
+			throw new IllegalArgumentException("No se puede agregar la misma arista dos veces");
+		
 		vecinos.get(i).remove(j);
 		vecinos.get(j).remove(i);
 	}
@@ -91,7 +93,6 @@ public class GrafoListaVecinos {
 		Localidad localidad = localidades.get(i);
 		return localidad.getCoordenadas();
 	}
-	
 	// Verifica que sea un vertice valido
 	private void verificarVertice(int i)
 	{
@@ -108,7 +109,7 @@ public class GrafoListaVecinos {
 		if( i == j )
 			throw new IllegalArgumentException("No se permiten loops: (" + i + ", " + j + ")");
 	}
-		
+	
 	public double darPeso(int x, int y) {
 		Localidad localidad1 = localidades.get(x);
 		Localidad localidad2 = localidades.get(y);

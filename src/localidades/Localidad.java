@@ -9,7 +9,6 @@ public class Localidad {
 	double latitud;
 	double longitud;
 	Coordinate coordenadas;
-
 	public Localidad (String nombre, String provincia, double latitud, double longitud) {
 		this.nombre = nombre;
 		this.provincia = provincia;
@@ -20,16 +19,8 @@ public class Localidad {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public String getProvincia() {
 		return provincia;
-	}
-
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
 	}
 
 	public Coordinate getCoordenadas() {

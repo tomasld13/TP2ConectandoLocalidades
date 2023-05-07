@@ -85,7 +85,6 @@ public class Kruskal {
         public Coordinate getCoordenadaOrigen() {
             return coordOrigen;
         }
-        
         public int getDestino() {
             return destino;
         }
