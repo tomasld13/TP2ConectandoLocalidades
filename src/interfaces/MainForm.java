@@ -20,7 +20,7 @@ public class MainForm extends JFrame {
 
 	private JPanel panelMapa;
 	private JPanel panelControles;
-	private JMapViewer mapa = new JMapViewer();
+	private static JMapViewer mapa;
 	private JButton btnEliminarLocalidad;
 	private JButton btnBuscarArbolMinimo ;
 	private ArrayList<String> localidades;
@@ -51,7 +51,6 @@ public class MainForm extends JFrame {
 		nuevaLocalidad();
 		generarArbolMinimo();
 		eliminarArbolMinimo();		
-		agregarLocalidad(localidades, modelo);
 		conectarLocalidades();
 
 	}
@@ -80,11 +79,10 @@ public class MainForm extends JFrame {
 		btnLocalidad = new JButton("Nueva Localidad");
 		btnLocalidad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("///// Agregando Nueva Localidad/////");
 				GestionLocalidades ventanaLocalidad = new GestionLocalidades(mapa);
 				ventanaLocalidad.setVisible(true);
 				setVisible(false);
-				System.out.println("///// Agregando Nueva Localidad/////");
-				
 			}
 		});
 		btnLocalidad.setBounds(27, 23, 195, 54);
@@ -124,7 +122,6 @@ public class MainForm extends JFrame {
 			public void actionPerformed(ActionEvent arg0){
 				PrbLocalidad ventana = new PrbLocalidad();
 				ventana.setVisible(true);
-
 				System.out.println("///// Generar Arbol Minimo /////");
 			}
 		});
@@ -145,13 +142,6 @@ public class MainForm extends JFrame {
 		panelControles.add(btnBuscarArbolMinimo);
 		
 		
-	}
-	private void agregarLocalidad(ArrayList<String> localidades, DefaultListModel<String> modelo) {
-		// TODO Auto-generated method stub
-		modelo.removeAllElements();
-		for (int i = 0; i<localidades.size(); i++) {
-			modelo.addElement(localidades.get(i));
-		}
 	}
 	
 	

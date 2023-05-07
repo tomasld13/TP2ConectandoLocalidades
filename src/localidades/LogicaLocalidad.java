@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListModel;
+import grafos.*;
 
 import interfaces.ConectarLocalidades;
 import interfaces.GestionLocalidades;
 
 public class LogicaLocalidad {
+	
+	GrafoListaVecinos grafos = new GrafoListaVecinos(GestionLocalidades.listarLocalidades.size());
 
 
 	public static void crearLocalidad(Localidad localidad, String nombre, String provincia, double latitud,
@@ -42,6 +45,7 @@ public class LogicaLocalidad {
 		return dLM;
 	}
 
+	
 
 	
 	

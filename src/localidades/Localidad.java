@@ -12,6 +12,8 @@ public class Localidad {
 	Double longitud;
 	Coordinate coordenadas;
 	
+	
+
 	public Localidad() {
 		
 	}
@@ -21,7 +23,7 @@ public class Localidad {
 		this.provincia = provincia;
 		this.latitud = latitud;
 		this.longitud = longitud;
-		coordenadas = new Coordinate (latitud.shortValue(), longitud.shortValue());
+		this.coordenadas = new Coordinate (latitud.shortValue(), longitud.shortValue());
 	}
 	
 	public String getNombre() {
@@ -54,5 +56,12 @@ public class Localidad {
 
 	public void setLongitud(Double longitud) {
 		this.longitud = longitud;
+	}
+	public Coordinate getCoordenadas() {
+		return coordenadas;
+	}
+
+	public void setCoordenadas(Coordinate coordenadas) {
+		this.coordenadas = coordenadas;
 	}
 }
