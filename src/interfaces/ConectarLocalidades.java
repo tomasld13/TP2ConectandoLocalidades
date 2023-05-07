@@ -1,4 +1,4 @@
-package localidades;
+package interfaces;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,7 +8,8 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
-import interfaces.MainForm;
+import localidades.Localidad;
+import localidades.LogicaLocalidad;
 
 import java.util.ArrayList;
 import javax.swing.JList;
@@ -25,7 +26,6 @@ public class ConectarLocalidades extends JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JMapViewer _mapa;
 	DefaultListModel<String> DLM = new DefaultListModel<String>();
@@ -65,9 +65,8 @@ public class ConectarLocalidades extends JFrame {
 		_mapa.setToolTipText("Selecciona un punto para conseguir la Latitud y Longitud");
 		_mapa.setZoom(4);
 		_mapa.setBounds(0, 0, 396, 368);
-		_mapa.setDisplayPosition(new Coordinate(-34.521, -58.7008), 15);
-		panelMapa.setLayout(null);
-		
+		_mapa.setDisplayPosition(new Coordinate(-34.521, -58.7008), 5);
+		panelMapa.setLayout(null);		
 		panelMapa.add(_mapa);
 		
 		
@@ -86,6 +85,22 @@ public class ConectarLocalidades extends JFrame {
 		listaLocalidades.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		listaLocalidades.setBounds(10, 44, 337, 430);
 		panelLocalidades.add(listaLocalidades);
+		listaLocalidades.setModel(LogicaLocalidad.crearModel(DLM));	
+		
+		JButton btnMostrar = new JButton("Mostrar");
+		btnMostrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				markeradd = new  Coordinate(listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLatitud(),
+											listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLongitud());
+				MapMarkerDot marca = new MapMarkerDot(markeradd);
+				_mapa.addMapMarker(marca);
+				System.out.println("Ubicacion " + listarLocalidades.get(listaLocalidades.getSelectedIndex()).getNombre()+" " + marca);
+			}
+		});
+		
+		btnMostrar.setBounds(258, 494, 89, 23);
+		panelLocalidades.add(btnMostrar);
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(559, 512, 214, 48);
@@ -96,31 +111,20 @@ public class ConectarLocalidades extends JFrame {
 		btnConectar.setBounds(10, 11, 89, 23);
 		panel.add(btnConectar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
+		JButton btnAtras = new JButton("Atras");
+		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainForm ventana = new MainForm();
 				ventana.setVisible(true);
 				setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(108, 11, 89, 23);
-		panel.add(btnCancelar);
-		
-		int tamano = listarLocalidades.size();
-		final String [] vector = new String [tamano];
-		for (int conta=0;conta<tamano;conta++) {
-			vector[conta] = listarLocalidades.get(conta).getNombre() + " - " + listarLocalidades.get(conta).getProvincia() + " - " + 
-							listarLocalidades.get(conta).getLatitud() + " - " + listarLocalidades.get(conta).getLongitud();
-			DLM.addElement(vector[conta]);
-			listaLocalidades.setModel(DLM);
-			
-			System.out.println(listarLocalidades.get(listaLocalidades.getSelectedIndex()));
-		//	markeradd = new  Coordinate(listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLatitud(),listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLongitud());
-		//	_lasCoordenadas.add(markeradd);
-		//_mapa.addMapMarker(new MapMarkerDot(markeradd));
-		}
+		btnAtras.setBounds(108, 11, 89, 23);
+		panel.add(btnAtras);
 
 		
 	}
+
 }
+
+
