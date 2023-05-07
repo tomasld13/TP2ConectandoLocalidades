@@ -33,7 +33,7 @@ public class GestionLocalidades extends JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3521851389367389426L;
+
 	private JPanel panelMapa;
 	private JPanel panelInformacion;
 	private JPanel panelBotones;
@@ -60,7 +60,7 @@ public class GestionLocalidades extends JFrame {
 	 * Create the application.
 	 * 
 	 */
-	public GestionLocalidades() {
+	public GestionLocalidades(JMapViewer mapa) {
 		getContentPane().setBackground(Color.WHITE);
 		setBackground(Color.WHITE);
 		setTitle("Nueva Localidad");
