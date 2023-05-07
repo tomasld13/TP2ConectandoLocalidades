@@ -209,9 +209,12 @@ public class GestionLocalidades extends JFrame {
 				}
 			}
 		});
+
 		btnGuardarYCrear.setBounds(109, 11, 144, 23);
 		panelBotones.add(btnGuardarYCrear);
 	}
+	
+	
 
 	protected void limpiar() {
 		textNombre.setText("");
@@ -221,7 +224,6 @@ public class GestionLocalidades extends JFrame {
 		_mapa.removeAllMapMarkers();
 
 	}
-
 	private void atras() {
 		atras = new JButton("Atras");
 		atras.addActionListener(new ActionListener() {
@@ -249,13 +251,15 @@ public class GestionLocalidades extends JFrame {
 					String Longitud = "" + markeradd.getLon();
 					textLatitud.setText(Latitud);
 					textLongitud.setText(Longitud);
-
 				}
 
 			}
 
 		});
 	}
+	
+	
+	
 
 	
 

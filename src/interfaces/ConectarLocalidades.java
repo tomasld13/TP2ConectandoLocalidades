@@ -7,6 +7,8 @@ import javax.swing.border.EmptyBorder;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
+
 
 import localidades.Localidad;
 import localidades.LogicaLocalidad;
@@ -15,11 +17,13 @@ import java.util.ArrayList;
 import javax.swing.JList;
 import javax.swing.JLabel;
 import javax.swing.DefaultListModel;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import org.openstreetmap.gui.jmapviewer.JMapViewer.ZOOM_BUTTON_STYLE;
 
 public class ConectarLocalidades extends JFrame {
 
@@ -27,10 +31,12 @@ public class ConectarLocalidades extends JFrame {
 	 * 
 	 */
 	private JPanel contentPane;
-	private JMapViewer _mapa;
+	private JMapViewer mapa;
 	DefaultListModel<String> DLM = new DefaultListModel<String>();
 	public ArrayList<Coordinate> _lasCoordenadas;
 	private Coordinate markeradd;
+	private MapPolygonImpl _poligono;
+
 
 	
 	/**
@@ -45,7 +51,7 @@ public class ConectarLocalidades extends JFrame {
 	 */
 	
 	public ConectarLocalidades() {
-		
+		_lasCoordenadas = new ArrayList<Coordinate>();
 		setTitle("Conectar Localidades");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 799, 610);
@@ -60,14 +66,15 @@ public class ConectarLocalidades extends JFrame {
 		panelMapa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panelMapa.setBounds(377, 11, 396, 368);
 		contentPane.add(panelMapa);
-		_mapa = new JMapViewer();
-		_mapa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		_mapa.setToolTipText("Selecciona un punto para conseguir la Latitud y Longitud");
-		_mapa.setZoom(4);
-		_mapa.setBounds(0, 0, 396, 368);
-		_mapa.setDisplayPosition(new Coordinate(-34.521, -58.7008), 5);
+		mapa = new JMapViewer();
+		mapa.setZoomButtonStyle(ZOOM_BUTTON_STYLE.VERTICAL);
+		mapa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		mapa.setToolTipText("Selecciona un punto para conseguir la Latitud y Longitud");
+		mapa.setZoom(4);
+		mapa.setBounds(0, 0, 396, 368);
+		mapa.setDisplayPosition(new Coordinate(-34.521, -58.7008), 5);
 		panelMapa.setLayout(null);		
-		panelMapa.add(_mapa);
+		panelMapa.add(mapa);
 		
 		
 		JPanel panelLocalidades = new JPanel();
@@ -90,11 +97,16 @@ public class ConectarLocalidades extends JFrame {
 		JButton btnMostrar = new JButton("Mostrar");
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				markeradd = new  Coordinate(listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLatitud(),
+				String nombre = listarLocalidades.get(listaLocalidades.getSelectedIndex()).getNombre();
+				markeradd = new  Coordinate (listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLatitud(),
 											listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLongitud());
-				MapMarkerDot marca = new MapMarkerDot(markeradd);
-				_mapa.addMapMarker(marca);
-				System.out.println("Ubicacion " + listarLocalidades.get(listaLocalidades.getSelectedIndex()).getNombre()+" " + marca);
+				
+				mapa.addMapMarker(new MapMarkerDot(nombre, markeradd));				
+				System.out.println(nombre + markeradd);
+				
+
+
+
 			}
 		});
 		
@@ -108,6 +120,10 @@ public class ConectarLocalidades extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnConectar = new JButton("Conectar");
+		btnConectar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				}
+		});
 		btnConectar.setBounds(10, 11, 89, 23);
 		panel.add(btnConectar);
 		

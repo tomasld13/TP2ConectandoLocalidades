@@ -32,6 +32,7 @@ public class LogicaLocalidad {
 		localidad.setLongitud(longitud);
 		GestionLocalidades.listarLocalidades.add(localidad);
 		ConectarLocalidades.listarLocalidades.add(localidad);
+		
 
 	}
 

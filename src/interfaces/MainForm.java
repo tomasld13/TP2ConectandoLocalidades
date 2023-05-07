@@ -9,6 +9,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
@@ -28,6 +29,7 @@ public class MainForm extends JFrame {
 	
 	private JButton btnConectarLocalidades;
 	private JButton btnLocalidad;
+	protected Object frame;
 
 
 	/**
@@ -124,6 +126,9 @@ public class MainForm extends JFrame {
 		btnBuscarArbolMinimo.setBounds(27, 147, 195, 54);
 		btnBuscarArbolMinimo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0){
+				PrbLocalidad ventana = new PrbLocalidad();
+				ventana.setVisible(true);
+				setVisible(false);
 				System.out.println("///// Generar Arbol Minimo /////");
 			}
 		});
