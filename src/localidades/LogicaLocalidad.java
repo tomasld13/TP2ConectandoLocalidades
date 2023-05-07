@@ -23,8 +23,6 @@ public class LogicaLocalidad {
 		GestionLocalidades.listarLocalidades.add(localidad);
 		ConectarLocalidades.listarLocalidades.add(localidad);
 		GestionLocalidades.listarLocalidades.indexOf(localidad);
-		
-
 	}
 
 	public static ListModel<String> crearModel(DefaultListModel<String> dLM) {
