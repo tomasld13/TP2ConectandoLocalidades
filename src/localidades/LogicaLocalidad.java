@@ -41,8 +41,8 @@ public class LogicaLocalidad {
 		final String[] vector = new String[tamano];
 		for (int conta = 0; conta < tamano; conta++) {
 			vector[conta] = GestionLocalidades.listarLocalidades.get(conta).getNombre() + " - "
-					+ GestionLocalidades.listarLocalidades.get(conta).getProvincia() + " - " + GestionLocalidades.listarLocalidades.get(conta).getLatitud()
-					+ " - " + GestionLocalidades.listarLocalidades.get(conta).getLongitud();
+					+ GestionLocalidades.listarLocalidades.get(conta).getProvincia() + " - " + GestionLocalidades.listarLocalidades.get(conta).getLatitud().shortValue()
+					+ " - " + GestionLocalidades.listarLocalidades.get(conta).getLongitud().shortValue();
 			if (!dLM.contains(vector[conta]))
 					dLM.addElement(vector[conta]);
 		}

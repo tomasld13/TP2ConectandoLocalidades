@@ -18,10 +18,10 @@ import grafos.*;
 
 public class MainForm extends JFrame {
 
-	private static final long serialVersionUID = 1L;
+
 	private JPanel panelMapa;
 	private JPanel panelControles;
-	private JMapViewer _mapa;
+	private JMapViewer _mapa = new JMapViewer();
 	private JButton btnEliminarLocalidad;
 	private JButton btnBuscarArbolMinimo ;
 	private ArrayList<String> localidades;
@@ -82,7 +82,7 @@ public class MainForm extends JFrame {
 		btnLocalidad = new JButton("Nueva Localidad");
 		btnLocalidad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestionLocalidades ventanaLocalidad = new GestionLocalidades();
+				GestionLocalidades ventanaLocalidad = new GestionLocalidades(_mapa);
 				ventanaLocalidad.setVisible(true);
 				setVisible(false);
 				System.out.println("///// Agregando Nueva Localidad/////");
@@ -105,7 +105,6 @@ public class MainForm extends JFrame {
 		getContentPane().add(panelMapa);
 	
 	
-		_mapa = new JMapViewer();
 		_mapa.setDisplayPosition(new Coordinate(-34.521, -58.7008), 5);
 				
 		panelMapa.add(_mapa);

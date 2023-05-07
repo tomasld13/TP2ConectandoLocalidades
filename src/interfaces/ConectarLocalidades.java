@@ -32,16 +32,15 @@ public class ConectarLocalidades extends JFrame {
 	 */
 	private JPanel contentPane;
 	private JMapViewer mapa;
-	DefaultListModel<String> DLM = new DefaultListModel<String>();
-	public ArrayList<Coordinate> _lasCoordenadas;
+	private DefaultListModel<String> DLM = new DefaultListModel<String>();	
 	private Coordinate markeradd;
-	private MapPolygonImpl _poligono;
 
 
 	
 	/**
 	 * Launch the application.
 	 */
+	
 	public static ArrayList<Localidad> listarLocalidades = new ArrayList<>();
 	
 	 
@@ -51,7 +50,6 @@ public class ConectarLocalidades extends JFrame {
 	 */
 	
 	public ConectarLocalidades() {
-		_lasCoordenadas = new ArrayList<Coordinate>();
 		setTitle("Conectar Localidades");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 799, 610);
@@ -98,15 +96,12 @@ public class ConectarLocalidades extends JFrame {
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nombre = listarLocalidades.get(listaLocalidades.getSelectedIndex()).getNombre();
-				markeradd = new  Coordinate (listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLatitud(),
-											listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLongitud());
+				markeradd = new  Coordinate (listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLatitud().shortValue(),
+											listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLongitud().shortValue());
 				
 				mapa.addMapMarker(new MapMarkerDot(nombre, markeradd));				
 				System.out.println(nombre + markeradd);
 				
-
-
-
 			}
 		});
 		
