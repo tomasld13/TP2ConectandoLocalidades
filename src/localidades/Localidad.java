@@ -1,23 +1,19 @@
 package localidades;
 
+import org.openstreetmap.gui.jmapviewer.Coordinate;
+
 public class Localidad {
-	
-	
 
 	String nombre;
 	String provincia;
-	Double latitud;
-	Double longitud;
-	
-	public Localidad() {
-		
-	}
+	double latitud;
+	double longitud;
+	Coordinate coordenadas;
 
-	public Localidad (String nombre, String provincia, Double latitud, Double longitud) {
+	public Localidad (String nombre, String provincia, double latitud, double longitud) {
 		this.nombre = nombre;
 		this.provincia = provincia;
-		this.latitud = latitud;
-		this.longitud = longitud;
+		this.coordenadas = new Coordinate(latitud, longitud);
 	}
 	
 	public String getNombre() {
@@ -36,19 +32,7 @@ public class Localidad {
 		this.provincia = provincia;
 	}
 
-	public Double getLatitud() {
-		return latitud;
-	}
-
-	public void setLatitud(Double latitud) {
-		this.latitud = latitud;
-	}
-
-	public Double getLongitud() {
-		return longitud;
-	}
-
-	public void setLongitud(Double longitud) {
-		this.longitud = longitud;
+	public Coordinate getCoordenadas() {
+		return coordenadas;
 	}
 }

@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.openstreetmap.gui.jmapviewer.Coordinate;
+
 import grafos.GrafoListaVecinos;
 
 public class Kruskal {
@@ -20,13 +22,13 @@ public class Kruskal {
         for (int i = 0; i < grafo.tamano(); i++) {
             for (int vecino : grafo.vecinos(i)) {
                 if (i < vecino) {  // Solo agregamos la arista una vez
-                    aristas.add(new Arista(i, vecino, grafo.darPeso(i, vecino)));
+                    aristas.add(new Arista(i, grafo.darNombreArista(i), grafo.darCoordenadaArista(i), vecino, grafo.darNombreArista(vecino), grafo.darCoordenadaArista(vecino), grafo.darPeso(i, vecino)));
                 }
             }
         }
 
         // Ordenar las aristas por peso de menor a mayor
-        Collections.sort(aristas, Comparator.comparingInt(Arista::getPeso));
+        Collections.sort(aristas, Comparator.comparingDouble(Arista::getPeso));
 
         // Aplicar el algoritmo de Kruskal
         ArrayList<Arista> arbolRecubridor = new ArrayList<>();
@@ -54,25 +56,49 @@ public class Kruskal {
 
     // Clase interna para representar una arista con origen, destino y peso
     public class Arista {
-        final int origen;
-        final int destino;
-        final int peso;
+        final private int origen;
+        final private String nombreOrigen;
+        final private Coordinate coordOrigen;
+        final private int destino;
+        final private String nombreDestino;
+        final private Coordinate coordDestino;
+        final private double peso;
 
-        public Arista(int origen, int destino, int peso) {
+        public Arista(int origen, String nombreOrigen, Coordinate coordOrigen, int destino, String nombreDestino, Coordinate coordDestino, double peso) {
             this.origen = origen;
+            this.nombreOrigen = nombreOrigen;
+            this.coordOrigen = coordOrigen;
             this.destino = destino;
-            this.peso = peso;//grafo.getPeso(origen, destino);  // Obtener el peso del grafo
+            this.nombreDestino = nombreDestino;
+            this.coordDestino = coordDestino;
+            this.peso = peso;
         }
-
-        public int getOrigen() {
+        
+		public int getOrigen() {
             return origen;
         }
-
+        
+        public String getNombreOrigen() {
+            return nombreOrigen;
+        }
+        
+        public Coordinate getCoordenadaOrigen() {
+            return coordOrigen;
+        }
+        
         public int getDestino() {
             return destino;
         }
-
-        public int getPeso() {
+        
+        public String getNombreDestino() {
+            return nombreDestino;
+        }
+        
+        public Coordinate getCoordenadaDestino() {
+            return coordDestino;
+        }
+        
+        public double getPeso() {
             return peso;
         }
     }

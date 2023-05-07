@@ -5,6 +5,9 @@ import javax.swing.JPanel;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
+
+import grafos.GrafoListaVecinos;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
@@ -28,7 +31,7 @@ public class MainForm extends JFrame {
 	private JButton btnConectarLocalidades;
 	private JButton btnLocalidad;
 
-
+	private GrafoListaVecinos grafo = new GrafoListaVecinos(10);
 	/**
 	 * Create the application.
 	 */
@@ -78,7 +81,7 @@ public class MainForm extends JFrame {
 		btnLocalidad = new JButton("Nueva Localidad");
 		btnLocalidad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestionLocalidades ventanaLocalidad = new GestionLocalidades();
+				GestionLocalidades ventanaLocalidad = new GestionLocalidades(grafo);
 				ventanaLocalidad.setVisible(true);
 				setVisible(false);
 				System.out.println("///// Agregando Nueva Localidad/////");

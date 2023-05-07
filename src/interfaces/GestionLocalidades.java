@@ -11,6 +11,8 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
+import grafos.GrafoListaVecinos;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -54,16 +56,18 @@ public class GestionLocalidades extends JFrame {
 	private JList listaLocalidades;
 	
 	private ArrayList <Localidad>   listarLocalidades;
-	Localidad localidad = new Localidad();
-
+	Localidad localidad;
+	
+	private GrafoListaVecinos grafo;
 	/**
 	 * Create the application.
 	 * 
 	 */
-	public GestionLocalidades() {
+	public GestionLocalidades(GrafoListaVecinos grafo) {
 		getContentPane().setBackground(Color.WHITE);
 		setBackground(Color.WHITE);
 		setTitle("Nueva Localidad");
+		this.grafo = grafo;
 		initialize();
 		
 	}
@@ -190,14 +194,13 @@ public class GestionLocalidades extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
-				localidad.setNombre(textNombre.getText());
-				localidad.setProvincia(textProvincia.getText());
-				localidad.setLatitud(Double.parseDouble(textLongitud.getText()));				
-				localidad.setLongitud(Double.parseDouble(textLatitud.getText()));
+			    localidad = new Localidad(textNombre.getText(), textProvincia.getText(), Double.parseDouble(textLongitud.getText()), Double.parseDouble(textLatitud.getText()));
+				//localidad.setNombre(textNombre.getText());
+				//localidad.setProvincia(textProvincia.getText());
+				//localidad.setLatitud(Double.parseDouble(textLongitud.getText()));				
+				//localidad.setLongitud(Double.parseDouble(textLatitud.getText()));
 				listarLocalidades.add(localidad);
 				ConectarLocalidades.listarLocalidades.add(localidad);
-				
 				
 				setVisible(false);
 				MainForm ventana = new MainForm();
@@ -240,14 +243,15 @@ public class GestionLocalidades extends JFrame {
 				
 				try {
 					
-					  Localidad localidad = new Localidad();
-					  localidad.setNombre(textNombre.getText());
-					  localidad.setProvincia(textProvincia.getText());
-					  localidad.setLatitud(Double.parseDouble(textLongitud.getText()));
-					  localidad.setLongitud(Double.parseDouble(textLatitud.getText()));
+					  Localidad localidad = new Localidad(textNombre.getText(), textProvincia.getText(), Double.parseDouble(textLongitud.getText()), Double.parseDouble(textLatitud.getText()));
+					  //localidad.setNombre(textNombre.getText());
+					  //localidad.setProvincia(textProvincia.getText());
+					  //localidad.setLatitud(Double.parseDouble(textLongitud.getText()));
+					  //localidad.setLongitud(Double.parseDouble(textLatitud.getText()));
 					  listarLocalidades.add(localidad);
+					  grafo.agregarVertice(listarLocalidades.size(), localidad);
 					  ConectarLocalidades.listarLocalidades.add(localidad);
-					 
+					  
 					  limpiar();
 
 

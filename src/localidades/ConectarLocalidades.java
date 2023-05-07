@@ -35,13 +35,6 @@ public class ConectarLocalidades extends JFrame {
 	private JMapViewer _mapa;
 	DefaultListModel DLM = new DefaultListModel();
 
-	
-	
-	
-	
-	
-
-
 	/**
 	 * Launch the application.
 	 */
@@ -120,7 +113,7 @@ public class ConectarLocalidades extends JFrame {
 		final String [] vector = new String [tamano];
 		for (int conta=0;conta<tamano;conta++) {
 			vector[conta] = listarLocalidades.get(conta).getNombre() + " - " + listarLocalidades.get(conta).getProvincia() + " - " + 
-							listarLocalidades.get(conta).getLatitud() + " - " + listarLocalidades.get(conta).getLongitud();
+							listarLocalidades.get(conta).getCoordenadas().getLat() + " - " + listarLocalidades.get(conta).getCoordenadas().getLon();
 			DLM.addElement(vector[conta]);
 		}
 
