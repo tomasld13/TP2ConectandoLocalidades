@@ -102,6 +102,8 @@ public class ConectarLocalidades extends JFrame {
 				mapa.addMapMarker(new MapMarkerDot(nombre, markeradd));				
 				System.out.println(nombre + markeradd);
 				
+				System.out.println(listarLocalidades.get(listaLocalidades.getSelectedIndex()).toString());
+				
 			}
 		});
 		

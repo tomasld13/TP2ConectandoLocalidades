@@ -65,9 +65,7 @@ public class GestionLocalidades extends JFrame {
 		setBackground(Color.WHITE);
 		setTitle("Nueva Localidad");
 		initialize();
-
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -78,7 +76,6 @@ public class GestionLocalidades extends JFrame {
 		detectarCoordenadas();
 
 	}
-
 	private void dibujarVentana() {
 		setBounds(100, 100, 795, 521);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -246,22 +243,13 @@ public class GestionLocalidades extends JFrame {
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					markeradd = (Coordinate) _mapa.getPosition(e.getPoint());
 					_lasCoordenadas.add(markeradd);
-					_mapa.addMapMarker(new MapMarkerDot(markeradd));
+					_mapa.addMapMarker(new MapMarkerDot(textNombre.getText(), markeradd));
 					String Latitud = "" + markeradd.getLat();
 					String Longitud = "" + markeradd.getLon();
 					textLatitud.setText(Latitud);
 					textLongitud.setText(Longitud);
 				}
-
 			}
-
 		});
-	}
-	
-	
-	
-
-	
-
-	
+	}	
 }

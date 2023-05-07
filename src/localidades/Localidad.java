@@ -1,5 +1,7 @@
 package localidades;
 
+import org.openstreetmap.gui.jmapviewer.Coordinate;
+
 public class Localidad {
 	
 	
@@ -8,6 +10,7 @@ public class Localidad {
 	String provincia;
 	Double latitud;
 	Double longitud;
+	Coordinate coordenadas;
 	
 	public Localidad() {
 		
@@ -18,6 +21,7 @@ public class Localidad {
 		this.provincia = provincia;
 		this.latitud = latitud;
 		this.longitud = longitud;
+		coordenadas = new Coordinate (latitud.shortValue(), longitud.shortValue());
 	}
 	
 	public String getNombre() {

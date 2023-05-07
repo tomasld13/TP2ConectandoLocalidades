@@ -95,8 +95,7 @@ public class PrbLocalidad extends JFrame{
 			{
 			if (e.getButton() == MouseEvent.BUTTON1)
 			{
-				Coordinate markeradd = (Coordinate)
-				_mapa.getPosition(e.getPoint());
+				Coordinate markeradd = (Coordinate)_mapa.getPosition(e.getPoint());
 				_lasCoordenadas.add(markeradd);
 				String nombre = JOptionPane.showInputDialog("Nombre: ");
 				_mapa.addMapMarker(new MapMarkerDot(nombre, markeradd));
