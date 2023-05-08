@@ -11,6 +11,8 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 
+import grafos.GrafoListaVecinos;
+
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -29,7 +31,7 @@ public class PrbLocalidad extends JFrame{
 	private JButton btnEliminar;
 	private MapPolygonImpl _poligono;
 	private JButton btnDibujarPolgono ;
-
+	private static GrafoListaVecinos _grafo;
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +41,7 @@ public class PrbLocalidad extends JFrame{
 		{
 			public void run() {
 				try {
-					MainForm window = new MainForm(_mapa);
+					MainForm window = new MainForm(_mapa, _grafo);
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
