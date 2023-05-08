@@ -205,7 +205,7 @@ public class GestionLocalidades extends JFrame {
 		atras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				MainForm ventana = new MainForm(_mapa, _grafo);
+				MainForm ventana = new MainForm(mapa, _grafo);
 				ventana.setVisible(true);
 			}
 		});
