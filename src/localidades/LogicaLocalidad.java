@@ -12,9 +12,6 @@ import interfaces.ConectarLocalidades;
 import interfaces.GestionLocalidades;
 
 public class LogicaLocalidad {
-	
-	GrafoListaVecinos grafos = new GrafoListaVecinos(GestionLocalidades.listarLocalidades.size());
-
 
 	public static Localidad crearLocalidad(Localidad localidad, String nombre, String provincia, double latitud,
 			double longitud, ArrayList<Localidad> listarLocalidades, JList<String> listaLocalidades) {
