@@ -61,12 +61,12 @@ public class GestionLocalidades extends JFrame {
 	 * Create the application.
 	 * 
 	 */
-	public GestionLocalidades(JMapViewer mapa, GrafoListaVecinos grafo) {
+	public GestionLocalidades(JMapViewer mapa2, GrafoListaVecinos grafo) {
 		getContentPane().setBackground(Color.WHITE);
 		setBackground(Color.WHITE);
 		setTitle("Nueva Localidad");
 		_grafo = grafo;
-		mapa = mapa;
+		mapa = mapa2;
 		initialize(mapa);
 	}
 	/**
