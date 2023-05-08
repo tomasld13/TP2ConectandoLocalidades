@@ -108,7 +108,7 @@ public class ConectarLocalidades extends JFrame {
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				MainForm ventana = new MainForm(mapa);
+				MainForm ventana = new MainForm(mapa, _grafo);
 				ventana.setVisible(true);
 			}
 		});
