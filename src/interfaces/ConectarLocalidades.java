@@ -9,7 +9,7 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 
-
+import grafos.GrafoListaVecinos;
 import localidades.Localidad;
 import localidades.LogicaLocalidad;
 
@@ -47,9 +47,11 @@ public class ConectarLocalidades extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param _grafo 
+	 * @param _grafo 
 	 */
 	
-	public ConectarLocalidades(JMapViewer mapa2) {
+	public ConectarLocalidades(JMapViewer mapa2, GrafoListaVecinos _grafo) {
 		setTitle("Conectar Localidades");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 799, 610);
@@ -96,8 +98,8 @@ public class ConectarLocalidades extends JFrame {
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nombre = listarLocalidades.get(listaLocalidades.getSelectedIndex()).getNombre();
-				markeradd = new  Coordinate (listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLatitud().shortValue(),
-											listarLocalidades.get(listaLocalidades.getSelectedIndex()).getLongitud().shortValue());
+				markeradd = new  Coordinate (listarLocalidades.get(listaLocalidades.getSelectedIndex()).getCoordenadas().getLat(),
+											listarLocalidades.get(listaLocalidades.getSelectedIndex()).getCoordenadas().getLon());
 				
 				mapa.addMapMarker(new MapMarkerDot(nombre, markeradd));				
 				System.out.println(nombre + markeradd);

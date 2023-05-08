@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 
+import grafos.GrafoListaVecinos;
 import interfaces.MainForm;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class ConectarLocalidades extends JFrame {
 	private JPanel contentPane;
 	private JMapViewer _mapa;
 	DefaultListModel DLM = new DefaultListModel();
-
+	private GrafoListaVecinos _grafo;
 	/**
 	 * Launch the application.
 	 */
@@ -101,7 +102,7 @@ public class ConectarLocalidades extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainForm ventana = new MainForm();
+				MainForm ventana = new MainForm(_mapa, _grafo);
 				ventana.setVisible(true);
 				setVisible(false);
 			}

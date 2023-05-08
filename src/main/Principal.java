@@ -1,6 +1,7 @@
 package main;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 
+import grafos.GrafoListaVecinos;
 import interfaces.MainForm;
 
 public class Principal {

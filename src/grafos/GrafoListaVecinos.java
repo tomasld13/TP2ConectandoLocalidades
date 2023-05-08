@@ -26,6 +26,7 @@ public class GrafoListaVecinos {
 	public void agregarVertice(int vertice, Localidad localidad) {
 		vecinos.add(new HashSet<Integer>());
         localidades.put(vertice, localidad);
+        System.out.println(localidad.getNombre());
     }
 	
 	public void eliminarVertice(int vertice) {

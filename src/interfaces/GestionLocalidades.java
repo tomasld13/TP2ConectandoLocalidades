@@ -53,7 +53,7 @@ public class GestionLocalidades extends JFrame {
 	public  JList<String> listaLocalidades;
 
 	public static ArrayList<Localidad> listarLocalidades = new ArrayList<>();
-	Localidad localidad = new Localidad();
+	Localidad localidad;
 	static DefaultListModel<String> DLM = new DefaultListModel<String>();
 	
 	private GrafoListaVecinos _grafo;
@@ -179,12 +179,13 @@ public class GestionLocalidades extends JFrame {
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {									
-					LogicaLocalidad.crearLocalidad(localidad,textNombre.getText(),textProvincia.getText(),Double.parseDouble(textLongitud.getText()),
+					Localidad creada = LogicaLocalidad.crearLocalidad(localidad,textNombre.getText(),textProvincia.getText(),Double.parseDouble(textLongitud.getText()),
 												Double.parseDouble(textLatitud.getText()),listarLocalidades, listaLocalidades);	
-					
 					listaLocalidades.setModel(LogicaLocalidad.crearModel(DLM));
+					
+					LogicaLocalidad.agregarLocalidadGrafo(creada, _grafo);
+					
 					limpiar();
-					;
 				} catch (Exception NumberFormatException) {
 					JOptionPane.showMessageDialog(null, "Completar todos los datos", "Error!",JOptionPane.ERROR_MESSAGE);
 				}
@@ -208,7 +209,7 @@ public class GestionLocalidades extends JFrame {
 		atras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				MainForm ventana = new MainForm(_mapa);
+				MainForm ventana = new MainForm(_mapa, _grafo);
 				ventana.setVisible(true);
 			}
 		});
