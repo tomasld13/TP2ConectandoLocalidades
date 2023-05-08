@@ -9,13 +9,17 @@ public class Localidad {
 	double latitud;
 	double longitud;
 	Coordinate coordenadas;
+	int codigo;
+	
+	
 	public Localidad() {
 		
 	}
-	public Localidad (String nombre, String provincia, double latitud, double longitud) {
+	public Localidad (String nombre, String provincia, double latitud, double longitud, int codigo) {
 		this.nombre = nombre;
 		this.provincia = provincia;
 		this.coordenadas = new Coordinate(latitud, longitud);
+		this.codigo = codigo;
 	}
 	
 	public String getNombre() {
@@ -32,5 +36,11 @@ public class Localidad {
 
 	public void setCoordenadas(Coordinate coordenadas) {
 		this.coordenadas = coordenadas;
+	}
+	public int getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 }

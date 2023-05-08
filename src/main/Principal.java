@@ -9,7 +9,6 @@ public class Principal {
 	private static GrafoListaVecinos _grafo = new GrafoListaVecinos();
 
 	public static void main(String[] args) {
-		System.out.println(_mapa);
 		MainForm ventana = new MainForm(_mapa, _grafo);
 		ventana.setVisible(true);
 		

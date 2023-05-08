@@ -93,6 +93,15 @@ public class ConectarLocalidades extends JFrame {
 		panelLocalidades.add(listaLocalidades);
 		listaLocalidades.setModel(LogicaLocalidad.crearModel(DLM));
 		
+		JButton btnInfo = new JButton("Ver Info");
+		btnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listarLocalidades.get(listaLocalidades.getSelectedIndex()).toString();
+			}
+		});
+		btnInfo.setBounds(258, 505, 89, 23);
+		panelLocalidades.add(btnInfo);
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(559, 512, 214, 48);
@@ -100,6 +109,20 @@ public class ConectarLocalidades extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnConectar = new JButton("Conectar");
+		btnConectar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				int[] seleccionado = listaLocalidades.getSelectedIndices();
+				for(int i=0;i<seleccionado.length-1;i++) {
+					System.out.println("Ubicacion index "+seleccionado[i]);
+					System.out.println("Codigo Localidad: " +listarLocalidades.get(i).getCodigo());
+						//System.out.println(listarLocalidades.get(listaLocalidades.getSelectedIndex()).getNombre());
+					_grafo.agregarArista(seleccionado[i],seleccionado[i+1]);
+					//// agregar arista
+					
+				}
+			}
+		});
 
 		btnConectar.setBounds(10, 11, 89, 23);
 		panel.add(btnConectar);
@@ -117,7 +140,6 @@ public class ConectarLocalidades extends JFrame {
 
 		
 	}
-
 }
 
 

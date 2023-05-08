@@ -179,8 +179,9 @@ public class GestionLocalidades extends JFrame {
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {									
-					Localidad creada = LogicaLocalidad.crearLocalidad(localidad,textNombre.getText(),textProvincia.getText(),Double.parseDouble(textLongitud.getText()),
-												Double.parseDouble(textLatitud.getText()),listarLocalidades, listaLocalidades);	
+					Localidad creada = LogicaLocalidad.crearLocalidad(localidad,textNombre.getText(),textProvincia.getText(),
+												Double.parseDouble(textLongitud.getText()),Double.parseDouble(textLatitud.getText()),
+												listarLocalidades, listaLocalidades,listarLocalidades.size());	
 					listaLocalidades.setModel(LogicaLocalidad.crearModel(DLM));
 					LogicaLocalidad.agregarLocalidadGrafo(creada, _grafo);
 					limpiar();
@@ -222,11 +223,16 @@ public class GestionLocalidades extends JFrame {
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					markeradd = (Coordinate) mapa.getPosition(e.getPoint());
 					_lasCoordenadas.add(markeradd);
-					mapa.addMapMarker(new MapMarkerDot(textNombre.getText(), markeradd));
-					String Latitud = "" + markeradd.getLat();
-					String Longitud = "" + markeradd.getLon();
-					textLatitud.setText(Latitud);
-					textLongitud.setText(Longitud);
+					if(!textNombre.getText().isEmpty()) {
+						mapa.addMapMarker(new MapMarkerDot(textNombre.getText(), markeradd));
+						String Latitud = "" + markeradd.getLat();
+						String Longitud = "" + markeradd.getLon();
+						textLatitud.setText(Latitud);
+						textLongitud.setText(Longitud);
+					}else {
+						JOptionPane.showMessageDialog(null, "Agregue un nombre a la Localidad", "Error!",JOptionPane.ERROR_MESSAGE);
+					}
+					
 				}
 			}
 		});

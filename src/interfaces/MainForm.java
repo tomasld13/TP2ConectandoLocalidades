@@ -26,10 +26,6 @@ public class MainForm extends JFrame {
 	private static JMapViewer mapa;
 	private JButton btnEliminarLocalidad;
 	private JButton btnBuscarArbolMinimo ;
-	private ArrayList<String> localidades;
-	private DefaultListModel<String> modelo;
-	
-	
 	private JButton btnConectarLocalidades;
 	private JButton btnLocalidad;
 	protected Object frame;
@@ -73,8 +69,6 @@ public class MainForm extends JFrame {
 		});
 		btnConectarLocalidades.setBounds(27, 88, 195, 48);
 		panelControles.add(btnConectarLocalidades);
-
-		
 	}
 
 	private void nuevaLocalidad() {
@@ -111,8 +105,8 @@ public class MainForm extends JFrame {
 		getContentPane().add(panelControles);		
 		panelControles.setLayout(null);
 		
-		localidades = new ArrayList<String>();
-		modelo = new DefaultListModel<String>();
+		new ArrayList<String>();
+		new DefaultListModel<String>();
 		
 	}
 

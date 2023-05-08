@@ -14,9 +14,9 @@ import interfaces.GestionLocalidades;
 public class LogicaLocalidad {
 
 	public static Localidad crearLocalidad(Localidad localidad, String nombre, String provincia, double latitud,
-			double longitud, ArrayList<Localidad> listarLocalidades, JList<String> listaLocalidades) {
+			double longitud, ArrayList<Localidad> listarLocalidades, JList<String> listaLocalidades, int codigo) {
 
-		localidad = new Localidad(nombre, provincia, latitud, longitud);
+		localidad = new Localidad(nombre, provincia, latitud, longitud, codigo);
 		GestionLocalidades.listarLocalidades.add(localidad);
 		ConectarLocalidades.listarLocalidades.add(localidad);
 		GestionLocalidades.listarLocalidades.indexOf(localidad);
@@ -38,8 +38,7 @@ public class LogicaLocalidad {
 					+ " - " + GestionLocalidades.listarLocalidades.get(conta).getCoordenadas().getLon();
 			if (!dLM.contains(vector[conta]))
 					dLM.addElement(vector[conta]);
-		}
-		
+		}		
 		return dLM;
 	}
 
