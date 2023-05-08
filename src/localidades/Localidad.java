@@ -29,9 +29,6 @@ public class Localidad {
 	public Coordinate getCoordenadas() {
 		return coordenadas;
 	}
-	public Coordinate getCoordenadas() {
-		return coordenadas;
-	}
 
 	public void setCoordenadas(Coordinate coordenadas) {
 		this.coordenadas = coordenadas;
