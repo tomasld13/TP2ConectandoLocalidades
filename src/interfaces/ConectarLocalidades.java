@@ -82,17 +82,20 @@ public class ConectarLocalidades extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelLocalidades.add(lblNewLabel);
 		
-		JList<String> listaLocalidades = new JList<String>();
-		listaLocalidades.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		listaLocalidades.setBounds(10, 44, 337, 430);
-		panelLocalidades.add(listaLocalidades);
-		listaLocalidades.setModel(LogicaLocalidad.crearModel(DLM));
+		JList<String> listaLocalidadesConectar = new JList<String>();
+		listaLocalidadesConectar.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		listaLocalidadesConectar.setBounds(10, 44, 337, 430);
+		panelLocalidades.add(listaLocalidadesConectar);
+		listaLocalidadesConectar.setModel(LogicaLocalidad.crearModel(DLM));
 		
 		JButton btnInfo = new JButton("Ver Info");
-		btnInfo.setEnabled(false);
 		btnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestionLocalidades.listarLocalidades.get(listaLocalidades.getSelectedIndex()).toString();
+				
+				JOptionPane.showMessageDialog(null, GestionLocalidades.listarLocalidades.get(listaLocalidadesConectar.getSelectedIndex()), "Info Localidad",JOptionPane.INFORMATION_MESSAGE);
+				System.out.println();
+				
+				
 			}
 		});
 		btnInfo.setBounds(258, 494, 89, 23);
@@ -108,7 +111,7 @@ public class ConectarLocalidades extends JFrame {
 		btnConectar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int[] seleccionado = listaLocalidades.getSelectedIndices();
+				int[] seleccionado = listaLocalidadesConectar.getSelectedIndices();
 				for(int i=0;i<seleccionado.length-1;i++) {
 					LogicaLocalidad.conectarLocalidadesGrafo(seleccionado[i], seleccionado[i+1], _grafo);
 					JOptionPane.showMessageDialog(null, GestionLocalidades.listarLocalidades.get(seleccionado[i]).getNombre() +" conectada con: " + GestionLocalidades.listarLocalidades.get(seleccionado[i+1]).getNombre(), "Conexión",JOptionPane.INFORMATION_MESSAGE);
@@ -130,7 +133,6 @@ public class ConectarLocalidades extends JFrame {
 		});
 		btnAtras.setBounds(108, 11, 89, 23);
 		panel.add(btnAtras);
-
 		
 	}
 }

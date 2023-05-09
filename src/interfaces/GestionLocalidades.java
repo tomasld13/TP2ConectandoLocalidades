@@ -40,7 +40,6 @@ public class GestionLocalidades extends JFrame {
 	private JPanel panelInformacion;
 	private JPanel panelBotones;
 	private JMapViewer mapa;
-	public 	ArrayList<Coordinate> _lasCoordenadas;
 	private JTextField textNombre;
 	private JTextField textProvincia;
 	private JTextField textLatitud;
@@ -214,15 +213,13 @@ public class GestionLocalidades extends JFrame {
 		panelBotones.add(atras);
 	}
 	private void detectarCoordenadas(JMapViewer mapa2) {
-		_lasCoordenadas = new ArrayList<Coordinate>();
 		mapa = mapa2;
 		mapa.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getButton() == MouseEvent.BUTTON1) {
-					markeradd = (Coordinate) mapa.getPosition(e.getPoint());
-					_lasCoordenadas.add(markeradd);
+					markeradd = (Coordinate) mapa.getPosition(e.getPoint());					
 					if(!textNombre.getText().isEmpty()) {
 						mapa.addMapMarker(new MapMarkerDot(textNombre.getText(), markeradd));
 						String Latitud = "" + markeradd.getLat();
@@ -236,5 +233,10 @@ public class GestionLocalidades extends JFrame {
 				}
 			}
 		});
-	}	
+	}
+	
+	@Override
+	public String toString() {
+		return "toString Gestion Localidades";
+	}
 }
