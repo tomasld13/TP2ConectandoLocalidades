@@ -113,13 +113,9 @@ public class ConectarLocalidades extends JFrame {
 				
 				int[] seleccionado = listaLocalidadesConectar.getSelectedIndices();
 				for(int i=0;i<seleccionado.length-1;i++) {
-					_grafo.agregarArista(seleccionado[i],seleccionado[i+1]);
-
-					GestionLocalidades.listarLocalidades.get(i).vecinos.add(GestionLocalidades.listarLocalidades.get(seleccionado[i+1]).getNombre());
-										
-
-					System.out.println("Link Arista: "+seleccionado[i]+" con Arista: "+seleccionado[i+1]);
-
+					LogicaLocalidad.conectarLocalidadesGrafo(seleccionado[i], seleccionado[i+1], _grafo);
+					JOptionPane.showMessageDialog(null, GestionLocalidades.listarLocalidades.get(seleccionado[i]).getNombre() +" conectada con: " + GestionLocalidades.listarLocalidades.get(seleccionado[i+1]).getNombre(), "Conexión",JOptionPane.INFORMATION_MESSAGE);
+					System.out.println("Link Arista: "+ GestionLocalidades.listarLocalidades.get(seleccionado[i]).getNombre() +" con Arista: "+ GestionLocalidades.listarLocalidades.get(seleccionado[i+1]).getNombre());
 				}
 			}
 		});
