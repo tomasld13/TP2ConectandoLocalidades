@@ -161,3 +161,4 @@ public class EdicionDeAristasTest
 		assertFalse( grafo.existeArista(2, 4) );
 	}
 }
+
