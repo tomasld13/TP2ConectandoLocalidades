@@ -1,13 +1,16 @@
 package interfaces;
 
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 
+import algoritmos.BFS;
 import algoritmos.Kruskal;
 import algoritmos.Kruskal.Arista;
 import grafos.GrafoListaVecinos;
@@ -15,7 +18,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
-
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
@@ -96,7 +99,8 @@ public class MainForm extends JFrame {
 			btnBuscarArbolMinimo = new JButton("Generar Arbol Minimo");
 			btnBuscarArbolMinimo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					 Kruskal kruskal = new Kruskal();		        
+					if(BFS.esConexo(_grafo)) {
+						Kruskal kruskal = new Kruskal();		        
 				        // Obtenemos el árbol de expansión mínima
 				        ArrayList<Arista> arbol = kruskal.kruskal(_grafo);		       
 						System.out.println("///// Generar Arbol Minimo /////");
@@ -105,7 +109,9 @@ public class MainForm extends JFrame {
 							Mensaje += " Origen: " + a.getNombreOrigen() + " - Destino:" + a.getNombreDestino() + " - Precio: $" + a.getPeso() +"\n";
 						}
 						JOptionPane.showMessageDialog(null, Mensaje, "Arbol Minimo",JOptionPane.INFORMATION_MESSAGE);
-					
+					}else {
+						JOptionPane.showMessageDialog(null, "Todos los pares de localidades tienen que estar conectados al menos por un camino.", "Error!",JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			});
 			btnBuscarArbolMinimo.setBounds(27, 147, 195, 48);
