@@ -20,8 +20,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.Color;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -41,7 +44,7 @@ public class GestionLocalidades extends JFrame {
 	private JPanel panelBotones;
 	private JMapViewer _mapa;
 	private JTextField textNombre;
-	private JTextField textProvincia;
+	//private JTextField textProvincia;
 	private JTextField textLatitud;
 	private JTextField textLongitud;
 
@@ -114,7 +117,13 @@ public class GestionLocalidades extends JFrame {
 		JLabel lblLatitud = new JLabel("Latitud");
 		lblLatitud.setBounds(10, 122, 52, 14);
 		panelInformacion.add(lblLatitud);
-
+		
+		JComboBox<String> provinciaComBox = new JComboBox<String>();
+		provinciaComBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Buenos Aires", "Ciudad Autónoma de Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdoba", "Corrientes", "Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones", "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe", "Santiago del Estero", "Tierra del Fuego, Antártida e Islas del Atlántico Sur", "Tucumán"}));
+		provinciaComBox.setSelectedIndex(0);
+		provinciaComBox.setBounds(66, 83, 171, 22);
+		panelInformacion.add(provinciaComBox);
+		
 		JLabel lblProvincia = new JLabel("Provincia");
 		lblProvincia.setBounds(10, 87, 63, 14);
 		panelInformacion.add(lblProvincia);
@@ -124,10 +133,10 @@ public class GestionLocalidades extends JFrame {
 		panelInformacion.add(textNombre);
 		textNombre.setColumns(10);
 
-		textProvincia = new JTextField();
-		textProvincia.setBounds(66, 84, 171, 20);
-		panelInformacion.add(textProvincia);
-		textProvincia.setColumns(10);
+		//textProvincia = new JTextField();
+		//textProvincia.setBounds(66, 84, 171, 20);
+		//panelInformacion.add(textProvincia);
+		//textProvincia.setColumns(10);
 
 		textLatitud = new JTextField();
 		textLatitud.setBounds(66, 116, 171, 20);
@@ -178,7 +187,7 @@ public class GestionLocalidades extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {									
 					if(!textNombre.getText().isEmpty()) {
-						Localidad creada = LogicaLocalidad.crearLocalidad(localidad,textNombre.getText(),textProvincia.getText(),
+						Localidad creada = LogicaLocalidad.crearLocalidad(localidad,textNombre.getText(),provinciaComBox.getSelectedItem().toString(),
 								Double.parseDouble(textLongitud.getText()),Double.parseDouble(textLatitud.getText()), listaLocalidades);	
 						listaLocalidades.setModel(LogicaLocalidad.crearModel(DLM));
 						LogicaLocalidad.agregarLocalidadGrafo(creada, _grafo);
@@ -198,7 +207,7 @@ public class GestionLocalidades extends JFrame {
 
 	protected void limpiar() {
 		textNombre.setText("");
-		textProvincia.setText("");
+		//textProvincia.setText("");
 		textLatitud.setText("");
 		textLongitud.setText("");
 	}

@@ -32,8 +32,7 @@ public class ConectarLocalidades extends JFrame {
 	 */
 	private JPanel contentPane;
 	private static JMapViewer _mapa;
-	private DefaultListModel<String> DLM = new DefaultListModel<String>();	
-	public static ArrayList<Localidad> conectarLocalidades = new ArrayList<>();
+	private DefaultListModel<String> DLM = new DefaultListModel<String>();
 	
 	/**
 	 * Launch the application.
