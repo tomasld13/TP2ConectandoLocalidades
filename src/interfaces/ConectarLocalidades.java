@@ -110,9 +110,7 @@ public class ConectarLocalidades extends JFrame {
 				int[] seleccionado = listaLocalidades.getSelectedIndices();
 				for(int i=0;i<seleccionado.length-1;i++) {
 					_grafo.agregarArista(seleccionado[i],seleccionado[i+1]);
-					//System.out.println("Link Arista: "+seleccionado[i]+" con Arista: "+seleccionado[i+1]);
-					
-					
+					System.out.println("Link Arista: "+seleccionado[i]+" con Arista: "+seleccionado[i+1]);
 				}
 			}
 		});

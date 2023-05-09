@@ -48,8 +48,6 @@ public class GrafoListaVecinos {
 		verificarVertice(i);
 		verificarVertice(j);
 		verificarDistintos(i, j);
-		if(existeArista(i, j)) 
-			throw new IllegalArgumentException("No se puede agregar la misma arista dos veces");
 		
 		vecinos.get(i).remove(j);
 		vecinos.get(j).remove(i);
