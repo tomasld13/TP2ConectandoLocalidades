@@ -83,15 +83,10 @@ public class GrafoListaVecinos {
 		return vecinos(i).size();
 	}
 	
-	public String darNombreVertice(int i) {
-		Localidad localidad = localidades.get(i);
-		return localidad.getNombre();
+	public Localidad darVertice(int i) {
+		return localidades.get(i);
 	}
 	
-	public Coordinate darCoordenadaArista(int i) {
-		Localidad localidad = localidades.get(i);
-		return localidad.getCoordenadas();
-	}
 	// Verifica que sea un vertice valido
 	private void verificarVertice(int i)
 	{

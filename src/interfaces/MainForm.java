@@ -34,11 +34,9 @@ import javax.swing.DropMode;
 
 
 public class MainForm extends JFrame {
-
-
 	private JPanel panelMapa;
 	private JPanel panelControles;
-	private static JMapViewer mapa;
+	private static JMapViewer _mapa;
 	private JButton btnConectarLocalidades;
 	private JButton btnLocalidad;
 	private MapPolygonImpl _poligono;
@@ -51,8 +49,8 @@ public class MainForm extends JFrame {
 	 * Create the application.
 	 */
 	
-	public MainForm(JMapViewer mapa2, GrafoListaVecinos grafo) {
-		mapa = mapa2;
+	public MainForm(JMapViewer mapa, GrafoListaVecinos grafo) {
+		_mapa = mapa;
 		_grafo = grafo;
 		initialize();
 		
@@ -64,7 +62,7 @@ public class MainForm extends JFrame {
 	private void initialize() 
 	{
 		
-		dibujarVentana(mapa);
+		dibujarVentana(_mapa);
 		nuevaLocalidad();
 		generarArbolMinimo();	
 		conectarLocalidades();
@@ -76,7 +74,7 @@ public class MainForm extends JFrame {
 		btnConectarLocalidades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("///// Conectar Localidades /////");
-				ConectarLocalidades ventana = new ConectarLocalidades(mapa, _grafo);
+				ConectarLocalidades ventana = new ConectarLocalidades(_mapa, _grafo);
 				ventana.setVisible(true);
 				}
 		});
@@ -113,7 +111,7 @@ public class MainForm extends JFrame {
 		btnLocalidad = new JButton("Nueva Localidad");
 		btnLocalidad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestionLocalidades ventanaLocalidad = new GestionLocalidades(mapa, _grafo);
+				GestionLocalidades ventanaLocalidad = new GestionLocalidades(_mapa, _grafo);
 				ventanaLocalidad.setVisible(true);
 				setVisible(false);
 			}
@@ -123,7 +121,7 @@ public class MainForm extends JFrame {
 		
 	}
 
-	private void dibujarVentana(JMapViewer mapa2) {
+	private void dibujarVentana(JMapViewer mapa) {
 		setTitle("Conectando Localidades");
 		setBounds(100, 100, 725, 506);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -133,10 +131,10 @@ public class MainForm extends JFrame {
 		panelMapa.setBounds(10, 11, 437, 446);
 		getContentPane().add(panelMapa);
 	
-		mapa = mapa2;
-		mapa.setDisplayPosition(new Coordinate(-34.521, -58.7008), 5);
+		_mapa = mapa;
+		_mapa.setDisplayPosition(new Coordinate(-34.521, -58.7008), 5);
 				
-		panelMapa.add(mapa);		
+		panelMapa.add(_mapa);		
 		panelControles = new JPanel();
 		panelControles.setForeground(Color.BLACK);
 		panelControles.setBounds(457, 11, 242, 446);
