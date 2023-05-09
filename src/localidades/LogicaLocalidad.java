@@ -39,8 +39,10 @@ public class LogicaLocalidad {
 		return dLM;
 	}
 
-	
-
+	@Override
+	public String toString() {
+		return "toString Logica Localidad";
+	}
 	
 	
 

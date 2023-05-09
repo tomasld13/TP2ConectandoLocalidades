@@ -8,6 +8,7 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 
+import algoritmos.BFS;
 import algoritmos.Kruskal;
 import algoritmos.Kruskal.Arista;
 import grafos.GrafoListaVecinos;
@@ -15,9 +16,14 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
-
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JFormattedTextField;
+import javax.swing.JTextPane;
+import java.awt.Color;
+import javax.swing.DropMode;
 
 
 
@@ -34,7 +40,6 @@ public class MainForm extends JFrame {
 
 	private GrafoListaVecinos _grafo;
 	private JButton btnBuscarArbolMinimo;
-	private JButton btninfoGrafo;
 	
 	/**
 	 * Create the application.
@@ -74,29 +79,14 @@ public class MainForm extends JFrame {
 		});
 		btnConectarLocalidades.setBounds(27, 88, 195, 48);
 		panelControles.add(btnConectarLocalidades);
-		{
-			btninfoGrafo = new JButton("info grafo");
-			btninfoGrafo.addActionListener(new ActionListener() {
-				
-				public void actionPerformed(ActionEvent e) {
-					System.out.println("info Grafo / size:" + _grafo.tamano());
-					
-					for(int i = 0; i< _grafo.tamano(); i++) {
-						System.out.println(_grafo.darNombreArista(i));
-						System.out.println("info Grafo");
-					}
-				}
-			});
-			btninfoGrafo.setBounds(109, 380, 89, 23);
-			panelControles.add(btninfoGrafo);
-		}
 	}
 	private void generarArbolMinimo(){
 			
 			btnBuscarArbolMinimo = new JButton("Generar Arbol Minimo");
 			btnBuscarArbolMinimo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					 Kruskal kruskal = new Kruskal();		        
+					if(BFS.esConexo(_grafo)) {
+						Kruskal kruskal = new Kruskal();		        
 				        // Obtenemos el árbol de expansión mínima
 				        ArrayList<Arista> arbol = kruskal.kruskal(_grafo);		       
 						System.out.println("///// Generar Arbol Minimo /////");
@@ -105,7 +95,9 @@ public class MainForm extends JFrame {
 							Mensaje += " Origen: " + a.getNombreOrigen() + " - Destino:" + a.getNombreDestino() + " - Precio: $" + a.getPeso() +"\n";
 						}
 						JOptionPane.showMessageDialog(null, Mensaje, "Arbol Minimo",JOptionPane.INFORMATION_MESSAGE);
-					
+					}else {
+						JOptionPane.showMessageDialog(null, "Todos los pares de localidades tienen que estar conectados al menos por un camino.", "Error!",JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			});
 			btnBuscarArbolMinimo.setBounds(27, 147, 195, 48);
@@ -143,6 +135,7 @@ public class MainForm extends JFrame {
 				
 		panelMapa.add(mapa);		
 		panelControles = new JPanel();
+		panelControles.setForeground(Color.BLACK);
 		panelControles.setBounds(457, 11, 242, 446);
 		getContentPane().add(panelControles);		
 		panelControles.setLayout(null);
@@ -151,12 +144,6 @@ public class MainForm extends JFrame {
 		new DefaultListModel<String>();
 		
 	}
-
-	
-	
-	
-	
 }	
-
 
 
