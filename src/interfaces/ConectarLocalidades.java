@@ -88,12 +88,13 @@ public class ConectarLocalidades extends JFrame {
 		listaLocalidades.setModel(LogicaLocalidad.crearModel(DLM));
 		
 		JButton btnInfo = new JButton("Ver Info");
+		btnInfo.setEnabled(false);
 		btnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestionLocalidades.listarLocalidades.get(listaLocalidades.getSelectedIndex()).toString();
 			}
 		});
-		btnInfo.setBounds(258, 505, 89, 23);
+		btnInfo.setBounds(258, 494, 89, 23);
 		panelLocalidades.add(btnInfo);
 		
 		
@@ -109,7 +110,7 @@ public class ConectarLocalidades extends JFrame {
 				int[] seleccionado = listaLocalidades.getSelectedIndices();
 				for(int i=0;i<seleccionado.length-1;i++) {
 					_grafo.agregarArista(seleccionado[i],seleccionado[i+1]);
-					System.out.println("Link Arista: "+seleccionado[i]+" con Arista: "+seleccionado[i+1]);
+					//System.out.println("Link Arista: "+seleccionado[i]+" con Arista: "+seleccionado[i+1]);
 					
 					
 				}

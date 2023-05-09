@@ -1,6 +1,7 @@
 package interfaces;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
@@ -76,9 +77,13 @@ public class MainForm extends JFrame {
 		{
 			btninfoGrafo = new JButton("info grafo");
 			btninfoGrafo.addActionListener(new ActionListener() {
+				
 				public void actionPerformed(ActionEvent e) {
+					System.out.println("info Grafo / size:" + _grafo.tamano());
+					
 					for(int i = 0; i< _grafo.tamano(); i++) {
-						_grafo.darNombreArista(i);
+						System.out.println(_grafo.darNombreArista(i));
+						System.out.println("info Grafo");
 					}
 				}
 			});
@@ -95,11 +100,12 @@ public class MainForm extends JFrame {
 				        // Obtenemos el árbol de expansión mínima
 				        ArrayList<Arista> arbol = kruskal.kruskal(_grafo);		       
 						System.out.println("///// Generar Arbol Minimo /////");
+						String Mensaje = "";
 						for (Arista a : arbol) {
-							System.out.println(" Origen: " + a.getNombreOrigen() + " - Destino:" + a.getNombreDestino() + " - Precio: $" + a.getPeso());
+							Mensaje += " Origen: " + a.getNombreOrigen() + " - Destino:" + a.getNombreDestino() + " - Precio: $" + a.getPeso() +"\n";
 						}
-						
-					//	mapa.addMapPolygon(_poligono);
+						JOptionPane.showMessageDialog(null, Mensaje, "Arbol Minimo",JOptionPane.INFORMATION_MESSAGE);
+					
 				}
 			});
 			btnBuscarArbolMinimo.setBounds(27, 147, 195, 48);

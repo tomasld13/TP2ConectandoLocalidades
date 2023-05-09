@@ -22,7 +22,7 @@ public class LogicaLocalidad {
 	}
 	
 	public static void agregarLocalidadGrafo(Localidad localidad, GrafoListaVecinos grafo) {
-		grafo.agregarVertice(GestionLocalidades.listarLocalidades.size(), localidad);
+		grafo.agregarVertice(localidad.getCodigo(), localidad);
 	}
 	
 	public static ListModel<String> crearModel(DefaultListModel<String> dLM) {
