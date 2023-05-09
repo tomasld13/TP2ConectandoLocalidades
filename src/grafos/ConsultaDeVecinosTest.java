@@ -66,4 +66,8 @@ public class ConsultaDeVecinosTest
 		int[] esperados = {0, 1};
 		Assert.iguales(esperados, grafo.vecinos(2));
 	}
+
 }
+
+
+

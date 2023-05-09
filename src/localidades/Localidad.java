@@ -1,5 +1,8 @@
 package localidades;
 
+
+import java.util.ArrayList;
+
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 
 public class Localidad {
@@ -10,8 +13,14 @@ public class Localidad {
 	double longitud;
 	Coordinate coordenadas;
 	int codigo;
+	public static ArrayList<String> vecinos = new ArrayList<>();
 	
-	
+	public ArrayList<String> getVecinos() {
+		return vecinos;
+	}
+	public static void setVecinos(ArrayList<String> vecinos) {
+		Localidad.vecinos = vecinos;
+	}
 	public Localidad() {
 		
 	}
@@ -43,4 +52,13 @@ public class Localidad {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+	
+	@Override
+	public String toString() {
+		return "Lugar Seleccionado: "+ this.getNombre()+ ". \n"
+				+"Provincia: "+ this.getProvincia()+". \n"
+				+"Coordenadas: "+ this.getCoordenadas()+ ". \n"
+				+"Vecinos " + this.getVecinos()+ ". \n";
+	}
+	
 }

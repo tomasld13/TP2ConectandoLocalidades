@@ -52,4 +52,9 @@ public class LogicaLocalidad {
         // Obtenemos el árbol de expansión mínima
         return kruskal.kruskal(_grafo);		  
 	}
+
+	@Override
+	public String toString() {
+		return "toString Logica Localidad";
+	}
 }

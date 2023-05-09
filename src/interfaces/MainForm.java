@@ -24,6 +24,12 @@ import java.text.NumberFormat;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JFormattedTextField;
+import javax.swing.JTextPane;
+import java.awt.Color;
+import javax.swing.DropMode;
 
 
 
@@ -40,7 +46,6 @@ public class MainForm extends JFrame {
 
 	private GrafoListaVecinos _grafo;
 	private JButton btnBuscarArbolMinimo;
-	private JButton btninfoGrafo;
 	
 	/**
 	 * Create the application.
@@ -66,10 +71,7 @@ public class MainForm extends JFrame {
 
 	}
 	
-
-
 	private void conectarLocalidades() {
-		
 		btnConectarLocalidades = new JButton("Conectar Localidades");
 		btnConectarLocalidades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,23 +82,8 @@ public class MainForm extends JFrame {
 		});
 		btnConectarLocalidades.setBounds(27, 88, 195, 48);
 		panelControles.add(btnConectarLocalidades);
-		{
-			btninfoGrafo = new JButton("info grafo");
-			btninfoGrafo.addActionListener(new ActionListener() {
-				
-				public void actionPerformed(ActionEvent e) {
-					System.out.println("info Grafo / size:" + _grafo.tamano());
-					
-					for(int i = 0; i< _grafo.tamano(); i++) {
-						System.out.println(_grafo.darNombreVertice(i));
-						System.out.println("info Grafo");
-					}
-				}
-			});
-			btninfoGrafo.setBounds(109, 380, 89, 23);
-			panelControles.add(btninfoGrafo);
-		}
 	}
+	
 	private void generarArbolMinimo(){
 			
 			btnBuscarArbolMinimo = new JButton("Generar Arbol Minimo");
@@ -151,6 +138,7 @@ public class MainForm extends JFrame {
 				
 		panelMapa.add(mapa);		
 		panelControles = new JPanel();
+		panelControles.setForeground(Color.BLACK);
 		panelControles.setBounds(457, 11, 242, 446);
 		getContentPane().add(panelControles);		
 		panelControles.setLayout(null);
@@ -159,12 +147,6 @@ public class MainForm extends JFrame {
 		new DefaultListModel<String>();
 		
 	}
-
-	
-	
-	
-	
 }	
-
 
 
