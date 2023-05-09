@@ -6,7 +6,6 @@ import javax.swing.border.EmptyBorder;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 
 import grafos.GrafoListaVecinos;
@@ -33,17 +32,12 @@ public class ConectarLocalidades extends JFrame {
 	private JPanel contentPane;
 	private static JMapViewer mapa;
 	private DefaultListModel<String> DLM = new DefaultListModel<String>();	
-
-
+	public static ArrayList<Localidad> conectarLocalidades = new ArrayList<>();
 	
 	/**
 	 * Launch the application.
 	 */
 	
-	public static ArrayList<Localidad> listarLocalidades = new ArrayList<>();
-	
-	 
-
 	/**
 	 * Create the frame.
 	 * @param _grafo 
@@ -96,7 +90,7 @@ public class ConectarLocalidades extends JFrame {
 		JButton btnInfo = new JButton("Ver Info");
 		btnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listarLocalidades.get(listaLocalidades.getSelectedIndex()).toString();
+				GestionLocalidades.listarLocalidades.get(listaLocalidades.getSelectedIndex()).toString();
 			}
 		});
 		btnInfo.setBounds(258, 505, 89, 23);
@@ -111,14 +105,12 @@ public class ConectarLocalidades extends JFrame {
 		JButton btnConectar = new JButton("Conectar");
 		btnConectar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
 				int[] seleccionado = listaLocalidades.getSelectedIndices();
 				for(int i=0;i<seleccionado.length-1;i++) {
-					System.out.println("Ubicacion index "+seleccionado[i]);
-					System.out.println("Codigo Localidad: " +listarLocalidades.get(i).getCodigo());
-						//System.out.println(listarLocalidades.get(listaLocalidades.getSelectedIndex()).getNombre());
 					_grafo.agregarArista(seleccionado[i],seleccionado[i+1]);
-					//// agregar arista
+					System.out.println("Link Arista: "+seleccionado[i]+" con Arista: "+seleccionado[i+1]);
+					
 					
 				}
 			}

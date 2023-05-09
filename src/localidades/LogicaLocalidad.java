@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListModel;
-import grafos.*;
+
 
 import grafos.GrafoListaVecinos;
-import interfaces.ConectarLocalidades;
 import interfaces.GestionLocalidades;
 
 public class LogicaLocalidad {
@@ -18,8 +17,6 @@ public class LogicaLocalidad {
 
 		localidad = new Localidad(nombre, provincia, latitud, longitud, codigo);
 		GestionLocalidades.listarLocalidades.add(localidad);
-		ConectarLocalidades.listarLocalidades.add(localidad);
-		GestionLocalidades.listarLocalidades.indexOf(localidad);
 		
 		return localidad;
 	}

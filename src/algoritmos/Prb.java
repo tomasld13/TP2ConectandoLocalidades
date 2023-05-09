@@ -15,14 +15,14 @@ public class Prb {
 		
 		// Creamos el grafo
 		GrafoListaVecinos grafo = new GrafoListaVecinos();
-		grafo.agregarVertice(0, new Localidad("San Miguel", "Buenos Aires", -34.54335, -58.71229,1));
-		grafo.agregarVertice(1, new Localidad("José C. Paz", "Buenos Aires", -34.51541, -58.76813,2));
-		grafo.agregarVertice(2, new Localidad("La Plata", "Buenos Aires", -34.92145, -57.95453,3));
-		grafo.agregarVertice(3, new Localidad("Córdoba", "Córdoba", -31.42008, -64.18877,4));
-		grafo.agregarVertice(4, new Localidad("Rosario", "Santa Fe", -32.95113, -60.66632,5));
-		grafo.agregarVertice(5, new Localidad("Mendoza", "Mendoza", -32.88946, -68.84584,6));
-		grafo.agregarVertice(6, new Localidad("Bariloche", "Río Negro", -41.13348, -71.31028,7));
-		grafo.agregarVertice(7, new Localidad("Ushuaia", "Tierra del Fuego", -54.80362, -68.30512,8));
+		grafo.agregarVertice(0, new Localidad("San Miguel", "Buenos Aires", -34.54335, -58.71229,0));
+		grafo.agregarVertice(1, new Localidad("Jose C. Paz", "Buenos Aires", -34.51541, -58.76813,1));
+		grafo.agregarVertice(2, new Localidad("La Plata", "Buenos Aires", -34.92145, -57.95453,2));
+		grafo.agregarVertice(3, new Localidad("Cordoba", "Córdoba", -31.42008, -64.18877,3));
+		grafo.agregarVertice(4, new Localidad("Rosario", "Santa Fe", -32.95113, -60.66632,4));
+		grafo.agregarVertice(5, new Localidad("Mendoza", "Mendoza", -32.88946, -68.84584,5));
+		grafo.agregarVertice(6, new Localidad("Bariloche", "Río Negro", -41.13348, -71.31028,6));
+		grafo.agregarVertice(7, new Localidad("Ushuaia", "Tierra del Fuego", -54.80362, -68.30512,7));
 
 		grafo.agregarArista(0, 1);
 		grafo.agregarArista(0, 2);
@@ -44,7 +44,7 @@ public class Prb {
         ArrayList<Arista> arbol = kruskal.kruskal(grafo);
         
         // Imprimimos las aristas del árbol
-        System.out.println("Aristas del árbol de expansión mínima:");
+        System.out.println("Aristas del arbol de expansion minima:");
         for (Arista a : arbol) {
             System.out.println(" Origen: " + a.getNombreOrigen() + " - Destino:" + a.getNombreDestino() + " - Precio: $" + a.getPeso());
         }
