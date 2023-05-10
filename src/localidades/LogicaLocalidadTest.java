@@ -33,7 +33,7 @@ public class LogicaLocalidadTest {
 
 	@Test
 	public void testAgregarLocalidad() {
-		assertTrue(GestionLocalidades.listarLocalidades.add(localidad_1));
+		assertTrue(LogicaLocalidad.listarLocalidades.add(localidad_1));
 	}
 
 	@Test

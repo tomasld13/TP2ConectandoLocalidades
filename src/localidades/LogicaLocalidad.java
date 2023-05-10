@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListModel;
+
+import org.openstreetmap.gui.jmapviewer.Coordinate;
+
 import algoritmos.BFS;
 import algoritmos.Kruskal;
 import algoritmos.Kruskal.Arista;
@@ -21,8 +24,8 @@ public class LogicaLocalidad {
 		
 		Coordinate coor = new Coordinate(latitud, longitud);
 		if(!existeLocalidad(listarLocalidades, coor)) {
-			localidad = new Localidad(nombre, provincia, latitud, longitud, codigo);	
-			GestionLocalidades.listarLocalidades.add(localidad);
+			localidad = new Localidad(nombre, provincia, latitud, longitud, listarLocalidades.size());	
+			listarLocalidades.add(localidad);
 		}
 		return localidad;
 	}
