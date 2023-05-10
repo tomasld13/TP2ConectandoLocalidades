@@ -41,8 +41,8 @@ public class PrbLocalidad extends JFrame{
 		{
 			public void run() {
 				try {
-					MainForm window = new MainForm(_mapa, _grafo);
-					window.setVisible(true);
+					//MainForm window = new MainForm(_mapa, _grafo, _listaLocalidades);
+					//window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -31,9 +31,8 @@ public class ConectarLocalidades extends JFrame {
 	 * 
 	 */
 	private JPanel contentPane;
-	private static JMapViewer mapa;
-	private DefaultListModel<String> DLM = new DefaultListModel<String>();	
-	public static ArrayList<Localidad> conectarLocalidades = new ArrayList<>();
+	private static JMapViewer _mapa;
+	private DefaultListModel<String> DLM = new DefaultListModel<String>();
 	
 	/**
 	 * Launch the application.
@@ -45,7 +44,7 @@ public class ConectarLocalidades extends JFrame {
 	 * @param _grafo 
 	 */
 	
-	public ConectarLocalidades(JMapViewer mapa2, GrafoListaVecinos _grafo) {
+	public ConectarLocalidades(JMapViewer mapa, GrafoListaVecinos _grafo) {
 		setTitle("Conectar Localidades");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 799, 610);
@@ -60,15 +59,15 @@ public class ConectarLocalidades extends JFrame {
 		panelMapa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panelMapa.setBounds(377, 11, 396, 368);
 		contentPane.add(panelMapa);
-		mapa = mapa2;
-		mapa.setZoomButtonStyle(ZOOM_BUTTON_STYLE.VERTICAL);
-		mapa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		mapa.setToolTipText("Selecciona un punto para conseguir la Latitud y Longitud");
-		mapa.setZoom(4);
-		mapa.setBounds(0, 0, 396, 368);
-		mapa.setDisplayPosition(new Coordinate(-34.521, -58.7008), 5);
+		_mapa = mapa;
+		_mapa.setZoomButtonStyle(ZOOM_BUTTON_STYLE.VERTICAL);
+		_mapa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		_mapa.setToolTipText("Selecciona un punto para conseguir la Latitud y Longitud");
+		_mapa.setZoom(4);
+		_mapa.setBounds(0, 0, 396, 368);
+		_mapa.setDisplayPosition(new Coordinate(-34.521, -58.7008), 5);
 		panelMapa.setLayout(null);		
-		panelMapa.add(mapa);
+		panelMapa.add(_mapa);
 		
 		
 		JPanel panelLocalidades = new JPanel();
@@ -91,11 +90,7 @@ public class ConectarLocalidades extends JFrame {
 		JButton btnInfo = new JButton("Ver Info");
 		btnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				JOptionPane.showMessageDialog(null, GestionLocalidades.listarLocalidades.get(listaLocalidadesConectar.getSelectedIndex()), "Info Localidad",JOptionPane.INFORMATION_MESSAGE);
-				System.out.println();
-				
-				
+				JOptionPane.showMessageDialog(null, LogicaLocalidad.listarLocalidades.get(listaLocalidadesConectar.getSelectedIndex()), "Info Localidad",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnInfo.setBounds(258, 494, 89, 23);
@@ -110,12 +105,11 @@ public class ConectarLocalidades extends JFrame {
 		JButton btnConectar = new JButton("Conectar");
 		btnConectar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				int[] seleccionado = listaLocalidadesConectar.getSelectedIndices();
 				for(int i=0;i<seleccionado.length-1;i++) {
 					LogicaLocalidad.conectarLocalidadesGrafo(seleccionado[i], seleccionado[i+1], _grafo);
-					JOptionPane.showMessageDialog(null, GestionLocalidades.listarLocalidades.get(seleccionado[i]).getNombre() +" conectada con: " + GestionLocalidades.listarLocalidades.get(seleccionado[i+1]).getNombre(), "Conexión",JOptionPane.INFORMATION_MESSAGE);
-					System.out.println("Link Arista: "+ GestionLocalidades.listarLocalidades.get(seleccionado[i]).getNombre() +" con Arista: "+ GestionLocalidades.listarLocalidades.get(seleccionado[i+1]).getNombre());
+					JOptionPane.showMessageDialog(null, LogicaLocalidad.listarLocalidades.get(seleccionado[i]).getNombre() +" conectada con: " + LogicaLocalidad.listarLocalidades.get(seleccionado[i+1]).getNombre(), "Conexión",JOptionPane.INFORMATION_MESSAGE);
+					System.out.println("Link Arista: "+ LogicaLocalidad.listarLocalidades.get(seleccionado[i]).getNombre() +" con Arista: "+ LogicaLocalidad.listarLocalidades.get(seleccionado[i+1]).getNombre());
 				}
 			}
 		});
@@ -127,7 +121,7 @@ public class ConectarLocalidades extends JFrame {
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				MainForm ventana = new MainForm(mapa, _grafo);
+				MainForm ventana = new MainForm(_mapa, _grafo);
 				ventana.setVisible(true);
 			}
 		});
