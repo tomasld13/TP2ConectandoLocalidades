@@ -1,4 +1,4 @@
-package src.Mapa;
+package interfaces;
 
 import java.awt.EventQueue;
 
@@ -11,6 +11,8 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 
+import grafos.GrafoListaVecinos;
+
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -19,18 +21,17 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class MainForm 
-{
+public class PrbLocalidad extends JFrame{
 
 	private JFrame frame;
 	private JPanel panelMapa;
 	private JPanel panelControles;
-	private JMapViewer _mapa;
+	private static JMapViewer _mapa;
 	private ArrayList<Coordinate> _lasCoordenadas;
 	private JButton btnEliminar;
 	private MapPolygonImpl _poligono;
 	private JButton btnDibujarPolgono ;
-
+	private static GrafoListaVecinos _grafo;
 	/**
 	 * Launch the application.
 	 */
@@ -40,8 +41,8 @@ public class MainForm
 		{
 			public void run() {
 				try {
-					MainForm window = new MainForm();
-					window.frame.setVisible(true);
+					//MainForm window = new MainForm(_mapa, _grafo, _listaLocalidades);
+					//window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,8 +53,7 @@ public class MainForm
 	/**
 	 * Create the application.
 	 */
-	public MainForm() 
-	{
+	public PrbLocalidad() {
 		initialize();
 	}
 
@@ -63,17 +63,17 @@ public class MainForm
 	private void initialize() 
 	{
 		frame = new JFrame();
-		frame.setBounds(100, 100, 725, 506);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setBounds(100, 100, 725, 506);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 		
 		panelMapa = new JPanel();
 		panelMapa.setBounds(10, 11, 437, 446);
-		frame.getContentPane().add(panelMapa);
+		getContentPane().add(panelMapa);
 		
 		panelControles = new JPanel();
 		panelControles.setBounds(457, 11, 242, 446);
-		frame.getContentPane().add(panelControles);		
+		getContentPane().add(panelControles);		
 		panelControles.setLayout(null);
 		
 		_mapa = new JMapViewer();
@@ -97,8 +97,7 @@ public class MainForm
 			{
 			if (e.getButton() == MouseEvent.BUTTON1)
 			{
-				Coordinate markeradd = (Coordinate)
-				_mapa.getPosition(e.getPoint());
+				Coordinate markeradd = (Coordinate)_mapa.getPosition(e.getPoint());
 				_lasCoordenadas.add(markeradd);
 				String nombre = JOptionPane.showInputDialog("Nombre: ");
 				_mapa.addMapMarker(new MapMarkerDot(nombre, markeradd));
