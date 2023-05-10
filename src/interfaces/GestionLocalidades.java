@@ -49,7 +49,7 @@ public class GestionLocalidades extends JFrame {
 	private JButton btnGuardar;
 
 	private Coordinate markeradd;
-	public  JList<String> listaLocalidades;
+	public  JList<String> listaLocalidades = new JList<String>();;
 
 	public static ArrayList<Localidad> listarLocalidades = new ArrayList<>();
 	Localidad localidad;
@@ -72,7 +72,7 @@ public class GestionLocalidades extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(JMapViewer mapa2) {
-		listarLocalidades = new ArrayList<>();
+		//listarLocalidades = new ArrayList<>();
 		dibujarVentana();
 		atras();
 		detectarCoordenadas(mapa2);
@@ -168,7 +168,7 @@ public class GestionLocalidades extends JFrame {
 		lblLocalidades.setBounds(10, 11, 217, 26);
 		panelLocalidades.add(lblLocalidades);
 
-		listaLocalidades = new JList<String>();
+	//	listaLocalidades = new JList<String>();
 		listaLocalidades.setBorder(new LineBorder(new Color(0, 0, 0)));
 		listaLocalidades.setBounds(10, 48, 234, 201);
 		panelLocalidades.add(listaLocalidades);
@@ -177,17 +177,19 @@ public class GestionLocalidades extends JFrame {
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {									
-					Localidad creada = LogicaLocalidad.crearLocalidad(localidad,textNombre.getText(),textProvincia.getText(),
-												Double.parseDouble(textLongitud.getText()),Double.parseDouble(textLatitud.getText()),
-												listarLocalidades, listaLocalidades,listarLocalidades.size());	
-					listaLocalidades.setModel(LogicaLocalidad.crearModel(DLM));
-					LogicaLocalidad.agregarLocalidadGrafo(creada, _grafo);
-					limpiar();
-				} catch (Exception NumberFormatException) {
-					JOptionPane.showMessageDialog(null, "Completar todos los datos", "Error!",JOptionPane.ERROR_MESSAGE);
+				try {		
+					    Localidad creada = LogicaLocalidad.crearLocalidad(localidad,textNombre.getText(),textProvincia.getText(),
+													Double.parseDouble(textLongitud.getText()),Double.parseDouble(textLatitud.getText()),
+													listarLocalidades, listaLocalidades,listarLocalidades.size());	
+						listaLocalidades.setModel(LogicaLocalidad.crearModel(DLM));
+						LogicaLocalidad.agregarLocalidadGrafo(creada, _grafo);
+						limpiar();
+				} catch (Exception NumberFormatException ) {
+					JOptionPane.showMessageDialog(null, "Esa ubicacion ya existe", "Error!",JOptionPane.ERROR_MESSAGE);
 				}
+				
 			}
+			
 		});
 
 		btnGuardar.setBounds(140, 11, 113, 23);

@@ -6,6 +6,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListModel;
 
+import org.openstreetmap.gui.jmapviewer.Coordinate;
 
 import grafos.GrafoListaVecinos;
 import interfaces.GestionLocalidades;
@@ -14,12 +15,15 @@ public class LogicaLocalidad {
 
 	public static Localidad crearLocalidad(Localidad localidad, String nombre, String provincia, double latitud,
 			double longitud, ArrayList<Localidad> listarLocalidades, JList<String> listaLocalidades, int codigo) {
-
-		localidad = new Localidad(nombre, provincia, latitud, longitud, codigo);
-		GestionLocalidades.listarLocalidades.add(localidad);
 		
+		Coordinate coor = new Coordinate(latitud, longitud);
+		if(!existeLocalidad(listarLocalidades, coor)) {
+			localidad = new Localidad(nombre, provincia, latitud, longitud, codigo);	
+			GestionLocalidades.listarLocalidades.add(localidad);
+		}
 		return localidad;
 	}
+	
 	
 	public static void agregarLocalidadGrafo(Localidad localidad, GrafoListaVecinos grafo) {
 		grafo.agregarVertice(localidad.getCodigo(), localidad);
@@ -38,12 +42,15 @@ public class LogicaLocalidad {
 		}		
 		return dLM;
 	}
-
-	@Override
-	public String toString() {
-		return "toString Logica Localidad";
+	
+	public static Boolean existeLocalidad(ArrayList<Localidad> listarLocalidades, Coordinate coordenadas) {
+		
+		for(Localidad loca : listarLocalidades) {
+			if (loca.getCoordenadas().equals(coordenadas)) {
+				return true;
+			}
+		}		
+		return false;
 	}
 	
-	
-
 }
