@@ -8,6 +8,7 @@ import localidades.LogicaLocalidad;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import grafos.GrafoListaVecinos;
 
@@ -18,6 +19,7 @@ import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.Color;
 
 import javax.swing.DefaultComboBoxModel;
@@ -44,7 +46,7 @@ public class GestionLocalidades extends JFrame {
 	private JPanel panelBotones;
 	private JMapViewer _mapa;
 	private JTextField textNombre;
-	//private JTextField textProvincia;
+	// private JTextField textProvincia;
 	private JTextField textLatitud;
 	private JTextField textLongitud;
 
@@ -52,12 +54,15 @@ public class GestionLocalidades extends JFrame {
 	private JButton btnGuardar;
 
 	private Coordinate markeradd;
-	public  JList<String> listaLocalidades;
-	
+	public JList<String> listaLocalidades;
+
 	Localidad localidad;
 	static DefaultListModel<String> DLM = new DefaultListModel<String>();
-	
+
 	private GrafoListaVecinos _grafo;
+
+	List<MapMarker> marcadoresLocalidades = new ArrayList<MapMarker>();
+
 	/**
 	 * Create the application.
 	 * 
@@ -70,6 +75,7 @@ public class GestionLocalidades extends JFrame {
 		_mapa = mapa;
 		initialize(_mapa);
 	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -79,6 +85,7 @@ public class GestionLocalidades extends JFrame {
 		detectarCoordenadas(mapa);
 
 	}
+
 	private void dibujarVentana() {
 		setBounds(100, 100, 795, 521);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,7 +96,6 @@ public class GestionLocalidades extends JFrame {
 		panelMapa.setBounds(297, 11, 430, 385);
 		getContentPane().add(panelMapa);
 
-		
 		_mapa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		_mapa.setToolTipText("Selecciona un punto para conseguir la Latitud y Longitud");
 		_mapa.setBounds(0, 0, 430, 385);
@@ -117,13 +123,17 @@ public class GestionLocalidades extends JFrame {
 		JLabel lblLatitud = new JLabel("Latitud");
 		lblLatitud.setBounds(10, 122, 52, 14);
 		panelInformacion.add(lblLatitud);
-		
+
 		JComboBox<String> provinciaComBox = new JComboBox<String>();
-		provinciaComBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Buenos Aires", "Ciudad Autónoma de Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdoba", "Corrientes", "Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones", "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe", "Santiago del Estero", "Tierra del Fuego, Antártida e Islas del Atlántico Sur", "Tucumán"}));
+		provinciaComBox.setModel(new DefaultComboBoxModel<String>(
+				new String[] { "Buenos Aires", "Ciudad Autónoma de Buenos Aires", "Catamarca", "Chaco", "Chubut",
+						"Córdoba", "Corrientes", "Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza",
+						"Misiones", "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
+						"Santiago del Estero", "Tierra del Fuego, Antártida e Islas del Atlántico Sur", "Tucumán" }));
 		provinciaComBox.setSelectedIndex(0);
 		provinciaComBox.setBounds(66, 83, 171, 22);
 		panelInformacion.add(provinciaComBox);
-		
+
 		JLabel lblProvincia = new JLabel("Provincia");
 		lblProvincia.setBounds(10, 87, 63, 14);
 		panelInformacion.add(lblProvincia);
@@ -133,10 +143,10 @@ public class GestionLocalidades extends JFrame {
 		panelInformacion.add(textNombre);
 		textNombre.setColumns(10);
 
-		//textProvincia = new JTextField();
-		//textProvincia.setBounds(66, 84, 171, 20);
-		//panelInformacion.add(textProvincia);
-		//textProvincia.setColumns(10);
+		// textProvincia = new JTextField();
+		// textProvincia.setBounds(66, 84, 171, 20);
+		// panelInformacion.add(textProvincia);
+		// textProvincia.setColumns(10);
 
 		textLatitud = new JTextField();
 		textLatitud.setBounds(66, 116, 171, 20);
@@ -181,22 +191,29 @@ public class GestionLocalidades extends JFrame {
 		listaLocalidades.setBounds(10, 48, 234, 201);
 		panelLocalidades.add(listaLocalidades);
 
-		
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {									
-					if(!textNombre.getText().isEmpty()) {
-						Localidad creada = LogicaLocalidad.crearLocalidad(localidad,textNombre.getText(),provinciaComBox.getSelectedItem().toString(),
-								Double.parseDouble(textLongitud.getText()),Double.parseDouble(textLatitud.getText()), listaLocalidades);	
+				try {
+					if (!textNombre.getText().isEmpty()) {
+						Localidad creada = LogicaLocalidad.crearLocalidad(localidad, textNombre.getText(),
+								provinciaComBox.getSelectedItem().toString(),
+								Double.parseDouble(textLongitud.getText()), Double.parseDouble(textLatitud.getText()),
+								listaLocalidades);
 						listaLocalidades.setModel(LogicaLocalidad.crearModel(DLM));
 						LogicaLocalidad.agregarLocalidadGrafo(creada, _grafo);
+						_mapa.addMapMarker(new MapMarkerDot(textNombre.getText(), markeradd));
+						
+						//Se crea nuevo puntero
+						_mapa.addMapMarker(new MapMarkerDot("Nueva Localidad", new Coordinate(0,0)));
 						limpiar();
-					}else {
-						JOptionPane.showMessageDialog(null, "Agregue un nombre a la Localidad", "Error!",JOptionPane.ERROR_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "Agregue un nombre a la Localidad", "Error!",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				} catch (Exception NumberFormatException) {
-					JOptionPane.showMessageDialog(null, "Completar todos los datos", "Error!",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Completar todos los datos", "Error!",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -207,14 +224,19 @@ public class GestionLocalidades extends JFrame {
 
 	protected void limpiar() {
 		textNombre.setText("");
-		//textProvincia.setText("");
+		// textProvincia.setText("");
 		textLatitud.setText("");
 		textLongitud.setText("");
 	}
+
 	private void atras() {
 		atras = new JButton("Atras");
 		atras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// _mapa.removeAllMapMarkers();
+				// for(MapMarker mm : marcadoresLocalidades) {
+				// _mapa.addMapMarker(mm);
+				// }
 				setVisible(false);
 				MainForm ventana = new MainForm(_mapa, _grafo);
 				ventana.setVisible(true);
@@ -223,6 +245,7 @@ public class GestionLocalidades extends JFrame {
 		atras.setBounds(263, 12, 89, 23);
 		panelBotones.add(atras);
 	}
+
 	private void detectarCoordenadas(JMapViewer mapa) {
 		_mapa = mapa;
 		_mapa.addMouseListener(new MouseAdapter() {
@@ -230,9 +253,24 @@ public class GestionLocalidades extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getButton() == MouseEvent.BUTTON1) {
-					_mapa.removeAllMapMarkers();
-					markeradd = (Coordinate) _mapa.getPosition(e.getPoint());					
+					List<MapMarker> marcadores = new ArrayList<MapMarker>();
+
+					for (MapMarker mm : _mapa.getMapMarkerList()) {
+						marcadores.add(mm);
+					}
+
+					if (marcadores.size() > 0) {
+						int tamaño = marcadores.size() - 1;
+						marcadores.remove(tamaño);
+						_mapa.removeAllMapMarkers();
+						for (MapMarker mm : marcadores) {
+							_mapa.addMapMarker(mm);
+						}
+					}
+					
+					markeradd = (Coordinate) _mapa.getPosition(e.getPoint());
 					_mapa.addMapMarker(new MapMarkerDot(textNombre.getText(), markeradd));
+
 					String Latitud = "" + markeradd.getLat();
 					String Longitud = "" + markeradd.getLon();
 					textLatitud.setText(Latitud);
@@ -241,7 +279,7 @@ public class GestionLocalidades extends JFrame {
 			}
 		});
 	}
-	
+
 	@Override
 	public String toString() {
 		return "toString Gestion Localidades";
