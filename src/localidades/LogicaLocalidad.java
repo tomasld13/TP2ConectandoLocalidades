@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListModel;
-
 import algoritmos.BFS;
 import algoritmos.Kruskal;
 import algoritmos.Kruskal.Arista;
@@ -17,12 +16,17 @@ public class LogicaLocalidad {
 	
 	public static Localidad crearLocalidad(Localidad localidad, String nombre, String provincia, double latitud,
 			double longitud, JList<String> listaLocalidades) {
-
 		localidad = new Localidad(nombre, provincia, latitud, longitud, listarLocalidades.size());
 		listarLocalidades.add(localidad);
 		
+		Coordinate coor = new Coordinate(latitud, longitud);
+		if(!existeLocalidad(listarLocalidades, coor)) {
+			localidad = new Localidad(nombre, provincia, latitud, longitud, codigo);	
+			GestionLocalidades.listarLocalidades.add(localidad);
+		}
 		return localidad;
 	}
+	
 	
 	public static void agregarLocalidadGrafo(Localidad localidad, GrafoListaVecinos grafo) {
 		grafo.agregarVertice(localidad.getCodigo(), localidad);
@@ -44,6 +48,15 @@ public class LogicaLocalidad {
 					dLM.addElement(vector[conta]);
 		}		
 		return dLM;
+	}
+	public static Boolean existeLocalidad(ArrayList<Localidad> listarLocalidades, Coordinate coordenadas) {
+		
+		for(Localidad loca : listarLocalidades) {
+			if (loca.getCoordenadas().equals(coordenadas)) {
+				return true;
+			}
+		}		
+		return false;
 	}
 
 	public static ArrayList<Arista> generarArbolMinimo(GrafoListaVecinos _grafo) {

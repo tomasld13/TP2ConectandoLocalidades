@@ -215,7 +215,9 @@ public class GestionLocalidades extends JFrame {
 					JOptionPane.showMessageDialog(null, "Completar todos los datos", "Error!",
 							JOptionPane.ERROR_MESSAGE);
 				}
+				
 			}
+			
 		});
 
 		btnGuardar.setBounds(140, 11, 113, 23);
