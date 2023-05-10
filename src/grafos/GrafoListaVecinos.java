@@ -83,15 +83,10 @@ public class GrafoListaVecinos {
 		return vecinos(i).size();
 	}
 	
-	public String darNombreArista(int i) {
-		Localidad localidad = localidades.get(i);
-		return localidad.getNombre();
+	public Localidad darVertice(int i) {
+		return localidades.get(i);
 	}
 	
-	public Coordinate darCoordenadaArista(int i) {
-		Localidad localidad = localidades.get(i);
-		return localidad.getCoordenadas();
-	}
 	// Verifica que sea un vertice valido
 	private void verificarVertice(int i)
 	{
@@ -113,7 +108,7 @@ public class GrafoListaVecinos {
 		Localidad localidad1 = localidades.get(x);
 		Localidad localidad2 = localidades.get(y);
 		
-		BigDecimal precioKM = new BigDecimal("2500.00");
+		BigDecimal precioKM = new BigDecimal("250.00");
 		BigDecimal distintasProvincias = new BigDecimal("15000.00"); //Aumento del 10% si las localidades son de provincias distintas.
 		int aumento300KM = 20; //Aumento del 20% si la distancia es mayor a 300km.
 		

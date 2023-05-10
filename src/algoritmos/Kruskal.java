@@ -22,7 +22,7 @@ public class Kruskal {
         for (int i = 0; i < grafo.tamano(); i++) {
             for (int vecino : grafo.vecinos(i)) {
                 if (i < vecino) {  // Solo agregamos la arista una vez
-                    aristas.add(new Arista(i, grafo.darNombreArista(i), grafo.darCoordenadaArista(i), vecino, grafo.darNombreArista(vecino), grafo.darCoordenadaArista(vecino), grafo.darPeso(i, vecino)));
+                    aristas.add(new Arista(i, grafo.darVertice(i).getNombre(), grafo.darVertice(i).getCoordenadas(), vecino, grafo.darVertice(vecino).getNombre(), grafo.darVertice(vecino).getCoordenadas(), grafo.darPeso(i, vecino)));
                 }
             }
         }
