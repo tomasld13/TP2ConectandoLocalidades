@@ -16,19 +16,19 @@ public class LogicaLocalidadTest {
 	GrafoListaVecinos grafo;
 	Localidad localidad_1,localidad_2,localidad_3,localidad_4;
 	Coordinate coordenada;
-	ArrayList<Localidad> listarLocalidades = new ArrayList<>();
 	
 	@Before
 	public void setUp() throws Exception {
+		LogicaLocalidad.listarLocalidades = new ArrayList<Localidad>();
 		localidad_1 = new Localidad("CABA", "Buenos Aires", -34.488447837809304, -58.447265625,0);
 		localidad_2 = new Localidad("CABA", "Buenos Aires", -34.488447837809304, -58.447265625,0);
 		localidad_3 = new Localidad("CABA", "Buenos Aires", -34.488447837809304, -58.447265625,0);
 		localidad_4 = new Localidad("CABA", "Buenos Aires", -34.488447837809304, -58.447265625,0);
 		coordenada = new Coordinate(-34.488447837809304, -58.447265625);
-		listarLocalidades.add(localidad_1);
-		listarLocalidades.add(localidad_2);
-		listarLocalidades.add(localidad_3);
-		listarLocalidades.add(localidad_4);		
+		LogicaLocalidad.listarLocalidades.add(localidad_1);
+		LogicaLocalidad.listarLocalidades.add(localidad_2);
+		LogicaLocalidad.listarLocalidades.add(localidad_3);
+		LogicaLocalidad.listarLocalidades.add(localidad_4);		
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class LogicaLocalidadTest {
 
 	@Test
 	public void testMismaLocalidad() {
-		assertTrue(LogicaLocalidad.existeLocalidad(listarLocalidades, coordenada));
+		assertTrue(LogicaLocalidad.existeLocalidad(coordenada));
 	}
 	
 }

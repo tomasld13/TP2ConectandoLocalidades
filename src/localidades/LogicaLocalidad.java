@@ -23,7 +23,7 @@ public class LogicaLocalidad {
 		listarLocalidades.add(localidad);
 		
 		Coordinate coor = new Coordinate(latitud, longitud);
-		if(!existeLocalidad(listarLocalidades, coor)) {
+		if(!existeLocalidad(coor)) {
 			localidad = new Localidad(nombre, provincia, latitud, longitud, listarLocalidades.size());	
 			listarLocalidades.add(localidad);
 		}
@@ -52,8 +52,7 @@ public class LogicaLocalidad {
 		}		
 		return dLM;
 	}
-	public static Boolean existeLocalidad(ArrayList<Localidad> listarLocalidades, Coordinate coordenadas) {
-		
+	public static Boolean existeLocalidad(Coordinate coordenadas) {
 		for(Localidad loca : listarLocalidades) {
 			if (loca.getCoordenadas().equals(coordenadas)) {
 				return true;
