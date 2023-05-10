@@ -106,10 +106,17 @@ public class ConectarLocalidades extends JFrame {
 		btnConectar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int[] seleccionado = listaLocalidadesConectar.getSelectedIndices();
-				for(int i=0;i<seleccionado.length-1;i++) {
-					LogicaLocalidad.conectarLocalidadesGrafo(seleccionado[i], seleccionado[i+1], _grafo);
-					JOptionPane.showMessageDialog(null, LogicaLocalidad.listarLocalidades.get(seleccionado[i]).getNombre() +" conectada con: " + LogicaLocalidad.listarLocalidades.get(seleccionado[i+1]).getNombre(), "Conexión",JOptionPane.INFORMATION_MESSAGE);
-					System.out.println("Link Arista: "+ LogicaLocalidad.listarLocalidades.get(seleccionado[i]).getNombre() +" con Arista: "+ LogicaLocalidad.listarLocalidades.get(seleccionado[i+1]).getNombre());
+				for(int i=0; i < seleccionado.length; i++) {
+					if(i != seleccionado.length-1) {
+						LogicaLocalidad.conectarLocalidadesGrafo(seleccionado[i], seleccionado[i+1], _grafo);
+						JOptionPane.showMessageDialog(null, LogicaLocalidad.listarLocalidades.get(seleccionado[i]).getNombre() +" conectada con: " + LogicaLocalidad.listarLocalidades.get(seleccionado[i+1]).getNombre(), "Conexión",JOptionPane.INFORMATION_MESSAGE);
+					}
+					for(int j = 0; j < seleccionado.length; j++) {
+						if(j != i) {
+							LogicaLocalidad.listarLocalidades.get(seleccionado[i]).agregarVecino(LogicaLocalidad.listarLocalidades.get(seleccionado[j]).getNombre());
+						}
+							
+					}
 				}
 			}
 		});

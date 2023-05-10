@@ -7,20 +7,21 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 
 public class Localidad {
 
-	String nombre;
-	String provincia;
-	double latitud;
-	double longitud;
-	Coordinate coordenadas;
-	int codigo;
-	public static ArrayList<String> vecinos = new ArrayList<>();
+	private String nombre;
+	private String provincia;
+	private Coordinate coordenadas;
+	private int codigo;
+	private ArrayList<String> vecinos = new ArrayList<>();
 	
 	public ArrayList<String> getVecinos() {
 		return vecinos;
 	}
-	public static void setVecinos(ArrayList<String> vecinos) {
-		Localidad.vecinos = vecinos;
+	
+	public void agregarVecino(String nombre) {
+		if(!vecinos.contains(nombre))
+			vecinos.add(nombre);
 	}
+	
 	public Localidad() {
 		
 	}
